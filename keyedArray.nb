@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     32711,        894]
-NotebookOptionsPosition[     30865,        828]
-NotebookOutlinePosition[     31243,        844]
-CellTagsIndexPosition[     31200,        841]
+NotebookDataLength[     46332,       1148]
+NotebookOptionsPosition[     43645,       1061]
+NotebookOutlinePosition[     44022,       1077]
+CellTagsIndexPosition[     43979,       1074]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -77,8 +77,37 @@ Cell[BoxData[{
         RowBox[{
          RowBox[{
           RowBox[{"Length", "@", "address"}], " ", "\[Equal]", " ", "0"}], 
-         ",", " ", 
-         RowBox[{"Return", "[", "Null", "]"}]}], "]"}], ";", 
+         ",", " ", "\[IndentingNewLine]", 
+         RowBox[{"If", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"MatchQ", "[", 
+            RowBox[{"newvalue", ",", "Null"}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Return", "[", "Null", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+             RowBox[{"in", " ", "this", " ", "case"}], ",", " ", 
+             RowBox[{
+             "the", " ", "key", " ", "does", " ", "not", " ", "yet", " ", 
+              "exist"}], ",", " ", 
+             RowBox[{
+             "and", " ", "the", " ", "user", " ", "has", " ", "passed", " ", 
+              "a", " ", "newvalue"}], ",", " ", 
+             RowBox[{
+             "so", " ", "we", " ", "need", " ", "to", " ", "create", " ", 
+              "the", " ", 
+              RowBox[{"key", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"x", ",", 
+              RowBox[{"{", 
+               RowBox[{"key", ",", "Null"}], "}"}]}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Return", "[", 
+             RowBox[{"keyedPart", "[", 
+              RowBox[{"x", ",", "key", ",", "newvalue", ",", "equalsstring"}],
+               "]"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
        "\[IndentingNewLine]", 
        RowBox[{"address", " ", "=", " ", 
         RowBox[{"First", "@", "address"}]}], ";", "\[IndentingNewLine]", 
@@ -199,7 +228,9 @@ Cell[BoxData[{
    3.5613370826734247`*^9}, {3.561337151467658*^9, 3.561337169623211*^9}, {
    3.5613372860093665`*^9, 3.561337291946638*^9}, 3.5613373286796026`*^9, {
    3.5613377183365145`*^9, 3.5613377654909534`*^9}, {3.561337906798027*^9, 
-   3.5613379081104765`*^9}, {3.614295733566064*^9, 3.614295736904571*^9}}],
+   3.5613379081104765`*^9}, {3.614295733566064*^9, 3.614295736904571*^9}, {
+   3.686007404362651*^9, 3.6860075259080887`*^9}, {3.686007644836273*^9, 
+   3.686007703448402*^9}, {3.6860077751943855`*^9, 3.686007783002209*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -318,7 +349,8 @@ Cell[BoxData[
     RowBox[{"3", ",", "4"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"5", ",", "6"}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{{3.561384905532483*^9, 3.561384919438199*^9}}]
+ CellChangeTimes->{{3.561384905532483*^9, 3.561384919438199*^9}, 
+   3.686007721319381*^9, 3.686007790233656*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -351,7 +383,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"primary\"\>", ",", "\<\"secondary\"\>"}], "}"}]], "Output",
- CellChangeTimes->{3.5613849583898277`*^9}]
+ CellChangeTimes->{3.5613849583898277`*^9, 3.6860077213888903`*^9, 
+  3.686007790291664*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -371,7 +404,8 @@ Cell[BoxData[
 
 Cell[BoxData["18000"], "Output",
  CellChangeTimes->{3.5613364963521905`*^9, 3.5613366118633795`*^9, 
-  3.561336747733162*^9, 3.561337064502248*^9, 3.561337340085415*^9}]
+  3.561336747733162*^9, 3.561337064502248*^9, 3.561337340085415*^9, 
+  3.6860077214118958`*^9, 3.686007790308168*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -407,8 +441,11 @@ assignment is not a symbol. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/General/setps\\\", ButtonNote -> \
 \\\"Set::setps\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5613378369413347`*^9}]
+ CellChangeTimes->{3.5613378369413347`*^9, 3.6860077214483895`*^9, 
+  3.686007790465222*^9}]
 }, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -425,6 +462,398 @@ Cell[BoxData[
       "\"\<primary\>\""}], "]"}], ",", "\"\<primary\>\""}], "]"}], " ", "=", 
   " ", "3"}]], "Input",
  CellChangeTimes->{3.5613378052863007`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"AppendTo", "::", "normal"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Nonatomic expression expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \
+\[NoBreak]\\!\\(AppendTo[\\(\\(\\(\\(keyedPart[\\(\\(\\(\\(keyedArray[\\(\\(\\\
+(\\({\\\"primary\\\", 18000}\\)\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\
+\\)]\\)\\), \\\"primary\\\"\\)\\)]\\)\\), \\(\\({\\\"primary\\\", Null}\\)\\)\
+\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/normal\\\", ButtonNote -> \
+\\\"AppendTo::normal\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077904967003`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"AppendTo", "::", "normal"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Nonatomic expression expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \
+\[NoBreak]\\!\\(AppendTo[\\(\\(\\(\\(keyedPart[\\(\\(\\(\\(keyedArray[\\(\\(\\\
+(\\({\\\"primary\\\", 18000}\\)\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\
+\\)]\\)\\), \\\"primary\\\"\\)\\)]\\)\\), \\(\\({\\\"primary\\\", Null}\\)\\)\
+\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/normal\\\", ButtonNote -> \
+\\\"AppendTo::normal\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077904986997`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"AppendTo", "::", "normal"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Nonatomic expression expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \
+\[NoBreak]\\!\\(AppendTo[\\(\\(\\(\\(keyedPart[\\(\\(\\(\\(keyedArray[\\(\\(\\\
+(\\({\\\"primary\\\", 18000}\\)\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\
+\\)]\\)\\), \\\"primary\\\"\\)\\)]\\)\\), \\(\\({\\\"primary\\\", Null}\\)\\)\
+\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/normal\\\", ButtonNote -> \
+\\\"AppendTo::normal\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905007005`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(AppendTo \
+:: normal\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during \
+this calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905167027`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905362062`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.686007790538207*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905397053`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905412054`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905532074`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.686007790555208*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905577087`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.68600779055921*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(Hold[\\(\\(\\(\\(address = \
+\\(\\(Position[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\\"primary\\\", 18000}\\)\
+\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\\)]\\)\\), \\\"primary\\\", \
+\\(\\({2}\\)\\)\\)\\)]\\)\\)\\)\\) ; \
+\\(\\(If[\\(\\(\\(\\(\\(\\(Length[address]\\)\\) \[Equal] 0\\)\\), \
+\\(\\(If[\\(\\(\\(\\(MatchQ[\\(\\(Null, Null\\)\\)]\\)\\), \\(\\(Return[Null]\
+\\)\\), \\(\\(\\(\\(AppendTo[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)}\\)\\), \\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)\\), \\(\\({\\\"primary\\\", \
+Null}\\)\\)\\)\\)]\\)\\) ; \
+\\(\\(Return[\\(\\(keyedPart[\\(\\(\\(\\(keyedArray[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\\"primary\\\", Null, \\\"=\\\"\\)\\)]\\)\\)]\
+\\)\\) ;\\)\\)\\)\\)]\\)\\)\\)\\)]\\)\\) ; \\(\\(address = \
+\\(\\(First[address]\\)\\)\\)\\) ; \\(\\(If[\\(\\(\\(\\(\\(\\(address \
+\[LeftDoubleBracket] \\(\\(-1\\)\\) \[RightDoubleBracket]\\)\\) \[NotEqual] 1\
+\\)\\), \\(\\(Return[Null]\\)\\)\\)\\)]\\)\\) ; \\(\\(\\(\\(address \
+\[LeftDoubleBracket] \\(\\(-1\\)\\) \[RightDoubleBracket]\\)\\) = 2\\)\\) ; \
+\\(\\(If[\\(\\(\\(\\(! \\(\\(MatchQ[\\(\\(Null, Null\\)\\)]\\)\\)\\)\\), \
+\\(\\(\\(\\(ToExpression[\\(\\(StringJoin[\\(\\(Flatten[\\(\\({\\(\
+\[LeftSkeleton] 7 \[RightSkeleton]\\)}\\)\\)]\\)\\)]\\)\\)]\\)\\) \
+;\\)\\)\\)\\)]\\)\\) ; \
+\\(\\(Return[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\\"primary\\\", \
+18000}\\)\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\\)]\\)\\) \
+\[LeftDoubleBracket] \\(\\(Sequence @@ address\\)\\) \[RightDoubleBracket]\\)\
+\\)]\\)\\) ;\\)\\)]\\)\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905612106`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(Hold[\\(\\(\\(\\(address = \
+\\(\\(Position[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\\"primary\\\", 18000}\\)\
+\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\\)]\\)\\), \\\"primary\\\", \
+\\(\\({2}\\)\\)\\)\\)]\\)\\)\\)\\) ; \
+\\(\\(If[\\(\\(\\(\\(\\(\\(Length[address]\\)\\) \[Equal] 0\\)\\), \
+\\(\\(If[\\(\\(\\(\\(MatchQ[\\(\\(Null, Null\\)\\)]\\)\\), \\(\\(Return[Null]\
+\\)\\), \\(\\(\\(\\(AppendTo[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)}\\)\\), \\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)\\), \\(\\({\\\"primary\\\", \
+Null}\\)\\)\\)\\)]\\)\\) ; \
+\\(\\(Return[\\(\\(keyedPart[\\(\\(\\(\\(keyedArray[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\\"primary\\\", Null, \\\"=\\\"\\)\\)]\\)\\)]\
+\\)\\) ;\\)\\)\\)\\)]\\)\\)\\)\\)]\\)\\) ; \\(\\(address = \
+\\(\\(First[address]\\)\\)\\)\\) ; \\(\\(If[\\(\\(\\(\\(\\(\\(address \
+\[LeftDoubleBracket] \\(\\(-1\\)\\) \[RightDoubleBracket]\\)\\) \[NotEqual] 1\
+\\)\\), \\(\\(Return[Null]\\)\\)\\)\\)]\\)\\) ; \\(\\(\\(\\(address \
+\[LeftDoubleBracket] \\(\\(-1\\)\\) \[RightDoubleBracket]\\)\\) = 2\\)\\) ; \
+\\(\\(If[\\(\\(\\(\\(! \\(\\(MatchQ[\\(\\(Null, Null\\)\\)]\\)\\)\\)\\), \
+\\(\\(\\(\\(ToExpression[\\(\\(StringJoin[\\(\\(Flatten[\\(\\({\\(\
+\[LeftSkeleton] 7 \[RightSkeleton]\\)}\\)\\)]\\)\\)]\\)\\)]\\)\\) \
+;\\)\\)\\)\\)]\\)\\) ; \
+\\(\\(Return[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\\"primary\\\", \
+18000}\\)\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\\)]\\)\\) \
+\[LeftDoubleBracket] \\(\\(Sequence @@ address\\)\\) \[RightDoubleBracket]\\)\
+\\)]\\)\\) ;\\)\\)]\\)\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905637107`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(Hold[\\(\\(\\(\\(address = \
+\\(\\(Position[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\\"primary\\\", 18000}\\)\
+\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\\)]\\)\\), \\\"primary\\\", \
+\\(\\({2}\\)\\)\\)\\)]\\)\\)\\)\\) ; \
+\\(\\(If[\\(\\(\\(\\(\\(\\(Length[address]\\)\\) \[Equal] 0\\)\\), \
+\\(\\(If[\\(\\(\\(\\(MatchQ[\\(\\(Null, Null\\)\\)]\\)\\), \\(\\(Return[Null]\
+\\)\\), \\(\\(\\(\\(AppendTo[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)}\\)\\), \\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)\\), \\(\\({\\\"primary\\\", \
+Null}\\)\\)\\)\\)]\\)\\) ; \
+\\(\\(Return[\\(\\(keyedPart[\\(\\(\\(\\(keyedArray[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\\"primary\\\", Null, \\\"=\\\"\\)\\)]\\)\\)]\
+\\)\\) ;\\)\\)\\)\\)]\\)\\)\\)\\)]\\)\\) ; \\(\\(address = \
+\\(\\(First[address]\\)\\)\\)\\) ; \\(\\(If[\\(\\(\\(\\(\\(\\(address \
+\[LeftDoubleBracket] \\(\\(-1\\)\\) \[RightDoubleBracket]\\)\\) \[NotEqual] 1\
+\\)\\), \\(\\(Return[Null]\\)\\)\\)\\)]\\)\\) ; \\(\\(\\(\\(address \
+\[LeftDoubleBracket] \\(\\(-1\\)\\) \[RightDoubleBracket]\\)\\) = 2\\)\\) ; \
+\\(\\(If[\\(\\(\\(\\(! \\(\\(MatchQ[\\(\\(Null, Null\\)\\)]\\)\\)\\)\\), \
+\\(\\(\\(\\(ToExpression[\\(\\(StringJoin[\\(\\(Flatten[\\(\\({\\(\
+\[LeftSkeleton] 7 \[RightSkeleton]\\)}\\)\\)]\\)\\)]\\)\\)]\\)\\) \
+;\\)\\)\\)\\)]\\)\\) ; \
+\\(\\(Return[\\(\\(\\(\\(keyedArray[\\(\\(\\(\\({\\\"primary\\\", \
+18000}\\)\\), \\(\\({\\\"secondary\\\", 19000}\\)\\)\\)\\)]\\)\\) \
+\[LeftDoubleBracket] \\(\\(Sequence @@ address\\)\\) \[RightDoubleBracket]\\)\
+\\)]\\)\\) ;\\)\\)]\\)\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905667105`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077214774055`*^9, 3.6860077905702114`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Hold", "[", 
+   RowBox[{
+    RowBox[{"address", "=", 
+     RowBox[{"Position", "[", 
+      RowBox[{
+       RowBox[{"keyedArray", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\<\"primary\"\>", ",", "18000"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\<\"secondary\"\>", ",", "19000"}], "}"}]}], "]"}], 
+       ",", "\<\"primary\"\>", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "[", "address", "]"}], "\[Equal]", "0"}], ",", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"MatchQ", "[", 
+         RowBox[{"Null", ",", "Null"}], "]"}], ",", 
+        RowBox[{"Return", "[", "Null", "]"}], ",", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{
+           RowBox[{"keyedArray", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"\<\"primary\"\>", ",", "18000"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"\<\"secondary\"\>", ",", "19000"}], "}"}]}], "]"}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{"\<\"primary\"\>", ",", "Null"}], "}"}]}], "]"}], ";", 
+         RowBox[{"Return", "[", 
+          RowBox[{"keyedPart", "[", 
+           RowBox[{
+            RowBox[{"keyedArray", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"\<\"primary\"\>", ",", "18000"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"\<\"secondary\"\>", ",", "19000"}], "}"}]}], "]"}], 
+            ",", "\<\"primary\"\>", ",", "Null", ",", "\<\"=\"\>"}], "]"}], 
+          "]"}], ";"}]}], "]"}]}], "]"}], ";", 
+    RowBox[{"address", "=", 
+     RowBox[{"First", "[", "address", "]"}]}], ";", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"address", "\[LeftDoubleBracket]", 
+        RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], "\[NotEqual]", "1"}], 
+      ",", 
+      RowBox[{"Return", "[", "Null", "]"}]}], "]"}], ";", 
+    RowBox[{
+     RowBox[{"address", "\[LeftDoubleBracket]", 
+      RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], "=", "2"}], ";", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"MatchQ", "[", 
+        RowBox[{"Null", ",", "Null"}], "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"ToExpression", "[", 
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{"{", 
+           RowBox[{"\<\"Part[\"\>", ",", 
+            RowBox[{"ToString", "[", 
+             RowBox[{"Unevaluated", "[", 
+              RowBox[{"keyedArray", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"\<\"primary\"\>", ",", "18000"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"\<\"secondary\"\>", ",", "19000"}], "}"}]}], "]"}], 
+              "]"}], "]"}], ",", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"\<\", \"\>", "<>", 
+               RowBox[{"ToString", "[", "i", "]"}]}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "address"}], "}"}]}], "]"}], 
+            ",", "\<\"] \"\>", ",", "\<\"=\"\>", ",", "\<\" \"\>", ",", 
+            RowBox[{"ToString", "[", 
+             InterpretationBox[
+              StyleBox[
+               RowBox[{"Unevaluated", "[", "Null", "]"}],
+               ShowStringCharacters->True,
+               NumberMarks->True],
+              InputForm[
+               Unevaluated[Null]],
+              AutoDelete->True,
+              Editable->True], "]"}]}], "}"}], "]"}], "]"}], "]"}], ";"}]}], 
+     "]"}], ";", 
+    RowBox[{"Return", "[", 
+     RowBox[{
+      RowBox[{"keyedArray", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\<\"primary\"\>", ",", "18000"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"\<\"secondary\"\>", ",", "19000"}], "}"}]}], "]"}], 
+      "\[LeftDoubleBracket]", 
+      RowBox[{"Sequence", "@@", "address"}], "\[RightDoubleBracket]"}], "]"}],
+     ";"}], "]"}], "\[LeftDoubleBracket]", "2", 
+  "\[RightDoubleBracket]"}]], "Output",
+ CellChangeTimes->{3.686007721589404*^9, 3.6860077905722113`*^9}]
+}, Open  ]],
 
 Cell[BoxData[
  RowBox[{
@@ -477,7 +906,8 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"\<\"secondary\"\>", ",", "19001"}], "}"}]}], "]"}]}], 
   "}"}]], "Output",
- CellChangeTimes->{3.5613380741509757`*^9}]
+ CellChangeTimes->{3.5613380741509757`*^9, 3.6860077216199017`*^9, 
+  3.6860077905962143`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -496,7 +926,8 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", "}"}]], "Output",
- CellChangeTimes->{{3.561338514571563*^9, 3.5613385426954827`*^9}}]
+ CellChangeTimes->{{3.561338514571563*^9, 3.5613385426954827`*^9}, 
+   3.686007721641903*^9, 3.686007790610717*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -510,7 +941,8 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", "}"}]], "Output",
- CellChangeTimes->{{3.5613385498202095`*^9, 3.5613386088023195`*^9}}]
+ CellChangeTimes->{{3.5613385498202095`*^9, 3.5613386088023195`*^9}, 
+   3.6860077216739073`*^9, 3.68600779062422*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -532,279 +964,62 @@ descriptions.types_id \nWHERE type_name='\>\"", " ", "<>", " ",
   3.5613389113375764`*^9}, {3.5613389700071983`*^9, 3.561339039207666*^9}}],
 
 Cell[BoxData[
- RowBox[{"{", 
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
   RowBox[{
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({row, \
+\\(\\(SQLExecute[\\(\\(\\\"SELECT * \\\\nFROM descriptions INNER JOIN types \
+\\\\nON types.id = descriptions.types_id \\\\nWHERE type_name='ceramic \
+capacitor' ;\\\", \\(\\(\\\"ShowColumnHeadings\\\" \[Rule] \
+True\\)\\)\\)\\)]\\)\\)}\\)\[NoBreak] does not have appropriate bounds. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/iterb\\\", \
+ButtonNote -> \\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077217059493`*^9, 3.6860077906462245`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({row, \
+\\(\\(SQLExecute[\\(\\(\\\"SELECT * \\\\nFROM descriptions INNER JOIN types \
+\\\\nON types.id = descriptions.types_id \\\\nWHERE type_name='ceramic \
+capacitor' ;\\\", \\(\\(\\\"ShowColumnHeadings\\\" \[Rule] \
+True\\)\\)\\)\\)]\\)\\)}\\)\[NoBreak] does not have appropriate bounds. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/iterb\\\", \
+ButtonNote -> \\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6860077217059493`*^9, 3.6860077906482253`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"keyedArray", "@@", 
+    RowBox[{"Transpose", "[", 
      RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "17"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6385"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"SQLExecute", "[", 
          RowBox[{
-         "2012", ",", "8", ",", "16", ",", "10", ",", "48", ",", "44.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "18"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6386"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "10", ",", "55", ",", "42.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "19"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6387"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "11", ",", "0", ",", "44.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "20"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6388"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "11", ",", "37", ",", "6.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "21"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6389"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "11", ",", "39", ",", "38.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "25"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6390"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "13", ",", "54", ",", "49.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "30"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6394"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "14", ",", "10", ",", "29.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "31"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6395"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "14", ",", "16", ",", "49.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "35"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6399"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "14", ",", "34", ",", "8.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
-   RowBox[{"keyedArray", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "37"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"vupn\"\>", ",", "6401"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"date_added\"\>", ",", 
-       RowBox[{"SQLDateTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "2012", ",", "8", ",", "16", ",", "14", ",", "37", ",", "59.`"}], 
-         "}"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{"\<\"attribute_names\"\>", 
-       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
-mounting type, operating temperature, package, size, height - seated (max), \
-thickness, lead spacing\"\>"}], "}"}]}], "]"}]}], "}"}]], "Output",
- CellChangeTimes->{3.561339039598276*^9}]
+         "myInventory", 
+          ",", "\<\"SELECT * \\nFROM descriptions INNER JOIN types \\nON \
+types.id = descriptions.types_id \\nWHERE type_name='ceramic capacitor' \
+;\"\>", ",", 
+          RowBox[{"\<\"ShowColumnHeadings\"\>", "\[Rule]", "True"}]}], "]"}], 
+        "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", "row"}], 
+      "}"}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"row", ",", 
+     RowBox[{"SQLExecute", "[", 
+      RowBox[{"\<\"SELECT * \\nFROM descriptions INNER JOIN types \\nON \
+types.id = descriptions.types_id \\nWHERE type_name='ceramic capacitor' \
+;\"\>", ",", 
+       RowBox[{"\<\"ShowColumnHeadings\"\>", "\[Rule]", "True"}]}], "]"}]}], 
+    "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.561339039598276*^9, 3.6860077217204165`*^9, 
+  3.6860077906502233`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -818,8 +1033,26 @@ Cell[BoxData[
  CellChangeTimes->{{3.561339032598545*^9, 3.5613390635036077`*^9}, {
   3.5613390965960875`*^9, 3.561339133579042*^9}}],
 
-Cell["Null", "Output",
- CellChangeTimes->{{3.5613391100486956`*^9, 3.5613391165640707`*^9}}]
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
+\[NoBreak]\\!\\(Table[\\(\\(\\(\\(keyedArray @@ \\(\\(Transpose[\\(\\({\\(\\(\
+\\(\\(SQLExecute[\\(\\(myInventory, \\\"SELECT * \\\\nFROM descriptions INNER \
+JOIN types \\\\nON types.id = descriptions.types_id \\\\nWHERE \
+type_name='ceramic capacitor' ;\\\", \\(\\(\\\"ShowColumnHeadings\\\" \[Rule] \
+True\\)\\)\\)\\)]\\)\\) \[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\\), \
+row}\\)\\)]\\)\\)\\)\\), \\(\\({row, \\(\\(SQLExecute[\\(\\(\\\"SELECT * \
+\\\\nFROM descriptions INNER JOIN types \\\\nON types.id = \
+descriptions.types_id \\\\nWHERE type_name='ceramic capacitor' ;\\\", \
+\\(\\(\\\"ShowColumnHeadings\\\" \[Rule] \
+True\\)\\)\\)\\)]\\)\\)}\\)\\)\\)\\)]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.686007721740921*^9, 3.6860077906642275`*^9}]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -827,8 +1060,8 @@ Cell[BoxData[""], "Input",
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{712, 718},
-WindowMargins->{{333, Automatic}, {Automatic, 60}},
+WindowSize->{1904, 1011},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (November 7, 2010)",
 StyleDefinitions->"Default.nb"
 ]
@@ -845,56 +1078,77 @@ CellTagsIndex->{}
 Notebook[{
 Cell[557, 20, 179, 4, 29, "Text"],
 Cell[739, 26, 413, 10, 72, "Input"],
-Cell[1155, 38, 7270, 163, 1092, "Input",
+Cell[1155, 38, 8767, 194, 1192, "Input",
  InitializationCell->True],
-Cell[8428, 203, 2889, 63, 312, "Input",
+Cell[9925, 234, 2889, 63, 232, "Input",
  InitializationCell->True],
-Cell[11320, 268, 965, 25, 152, "Input",
+Cell[12817, 299, 965, 25, 152, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[12310, 297, 425, 12, 31, "Input"],
-Cell[12738, 311, 296, 9, 30, "Output"]
+Cell[13807, 328, 425, 12, 31, "Input"],
+Cell[14235, 342, 344, 10, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13071, 325, 102, 1, 49, "Subtitle"],
-Cell[13176, 328, 91, 1, 31, "Input"],
-Cell[13270, 331, 401, 11, 31, "Input"],
+Cell[14616, 357, 102, 1, 49, "Subtitle"],
+Cell[14721, 360, 91, 1, 31, "Input"],
+Cell[14815, 363, 401, 11, 31, "Input"],
 Cell[CellGroupData[{
-Cell[13696, 346, 118, 2, 31, "Input"],
-Cell[13817, 350, 147, 3, 30, "Output"]
+Cell[15241, 378, 118, 2, 31, "Input"],
+Cell[15362, 382, 196, 4, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14001, 358, 404, 11, 31, "Input"],
-Cell[14408, 371, 169, 2, 30, "Output"]
+Cell[15595, 391, 404, 11, 31, "Input"],
+Cell[16002, 404, 218, 3, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14614, 378, 671, 18, 52, "Input"],
-Cell[15288, 398, 534, 11, 21, "Message"]
-}, Open  ]],
-Cell[15837, 412, 490, 14, 52, "Input"],
-Cell[16330, 428, 709, 19, 92, "Input"],
-Cell[17042, 449, 298, 7, 31, "Input"],
-Cell[CellGroupData[{
-Cell[17365, 460, 69, 1, 31, "Input"],
-Cell[17437, 463, 532, 16, 50, "Output"]
+Cell[16257, 412, 671, 18, 52, "Input"],
+Cell[16931, 432, 583, 12, 21, "Message"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18006, 484, 419, 10, 92, "Input"],
-Cell[18428, 496, 113, 2, 30, "Output"]
+Cell[17551, 449, 490, 14, 31, "Input"],
+Cell[18044, 465, 753, 14, 21, "Message"],
+Cell[18800, 481, 753, 14, 21, "Message"],
+Cell[19556, 497, 753, 14, 21, "Message"],
+Cell[20312, 513, 559, 11, 21, "Message"],
+Cell[20874, 526, 499, 10, 21, "Message"],
+Cell[21376, 538, 497, 10, 21, "Message"],
+Cell[21876, 550, 499, 10, 21, "Message"],
+Cell[22378, 562, 566, 11, 21, "Message"],
+Cell[22947, 575, 499, 10, 21, "Message"],
+Cell[23449, 587, 497, 10, 21, "Message"],
+Cell[23949, 599, 499, 10, 21, "Message"],
+Cell[24451, 611, 563, 11, 21, "Message"],
+Cell[25017, 624, 2090, 34, 39, "Message"],
+Cell[27110, 660, 2090, 34, 39, "Message"],
+Cell[29203, 696, 2090, 34, 39, "Message"],
+Cell[31296, 732, 554, 11, 21, "Message"],
+Cell[31853, 745, 4161, 109, 107, "Output"]
+}, Open  ]],
+Cell[36029, 857, 709, 19, 92, "Input"],
+Cell[36741, 878, 298, 7, 31, "Input"],
+Cell[CellGroupData[{
+Cell[37064, 889, 69, 1, 31, "Input"],
+Cell[37136, 892, 583, 17, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18578, 503, 228, 5, 31, "Input"],
-Cell[18809, 510, 115, 2, 30, "Output"]
+Cell[37756, 914, 419, 10, 92, "Input"],
+Cell[38178, 926, 161, 3, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18961, 517, 738, 14, 132, "Input"],
-Cell[19702, 533, 10592, 273, 1304, "Output"]
+Cell[38376, 934, 228, 5, 31, "Input"],
+Cell[38607, 941, 164, 3, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30331, 811, 316, 7, 31, "Input"],
-Cell[30650, 820, 92, 1, 30, "Output"]
+Cell[38808, 949, 738, 14, 132, "Input"],
+Cell[39549, 965, 721, 13, 73, "Message"],
+Cell[40273, 980, 721, 13, 73, "Message"],
+Cell[40997, 995, 1028, 26, 145, "Output"]
 }, Open  ]],
-Cell[30757, 824, 92, 1, 31, "Input"]
+Cell[CellGroupData[{
+Cell[42062, 1026, 316, 7, 31, "Input"],
+Cell[42381, 1035, 1141, 19, 124, "Message"]
+}, Open  ]],
+Cell[43537, 1057, 92, 1, 31, "Input"]
 }, Open  ]]
 }
 ]

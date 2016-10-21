@@ -31,7 +31,16 @@ keyedPart[x_, key_, newvalue_:Null, equalsstring_:"="] :=
 Block[
 {address},
 address = Position[x, key, {2}];
-If[Length@address == 0, Return[Null]];
+If[Length@address == 0, 
+If[
+MatchQ[newvalue,Null],
+Return[Null],
+(*in this case, the key does not yet exist, and the user has passed a newvalue, so we need to create the key.*)
+AppendTo[x,{key,Null}];
+Return[keyedPart[x,key,newvalue,equalsstring]];
+
+]
+];
 address = First@address;
 If[address[[-1]] != 1, Return[Null]];
 address[[-1]] = 2;
