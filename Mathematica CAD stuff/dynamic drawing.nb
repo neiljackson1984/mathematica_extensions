@@ -1,0 +1,58 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      1206,         48]
+NotebookOptionsPosition[       880,         32]
+NotebookOutlinePosition[      1227,         47]
+CellTagsIndexPosition[      1184,         44]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", "drawing", "]"}]], "Input",
+ CellChangeTimes->{{3.4840612216875*^9, 3.484061224703125*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[$CellContext`drawing, StandardForm],
+  ImageSizeCache->{907., {308., 311.}}]], "Output",
+ CellChangeTimes->{3.484061225015625*^9}]
+}, Open  ]]
+},
+WindowSize->{1083, 743},
+WindowMargins->{{239, Automatic}, {14, Automatic}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 130, 2, 31, "Input"],
+Cell[700, 26, 164, 3, 634, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

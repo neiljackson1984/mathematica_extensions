@@ -1,0 +1,408 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     18345,        399]
+NotebookOptionsPosition[     17985,        383]
+NotebookOutlinePosition[     18365,        399]
+CellTagsIndexPosition[     18322,        396]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"define", " ", "global", " ", 
+     RowBox[{"variables", ":", "\n", "camfilepreamble"}]}], ",", " ", 
+    RowBox[{
+    "a", " ", "string", " ", "to", " ", "insert", " ", "at", " ", "the", " ", 
+     "beginning", " ", "of", " ", "the", " ", "cam", " ", "file"}], ",", "\n",
+     "camfiledirectory", ",", " ", 
+    RowBox[{
+    "the", " ", "path", " ", "of", " ", "the", " ", "directory", " ", "in", 
+     " ", "which", " ", "to", " ", "insert", " ", "the", " ", "cam", " ", 
+     "files"}]}], "\n", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.484138303203125*^9, 3.484138408859375*^9}, {
+   3.484140082125*^9, 3.484140082140625*^9}, 3.484153384265625*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "this", " ", "function", " ", "returns", " ", "a", " ", "grid", " ", 
+    "construct", " ", "clearly", " ", "showing", " ", "each", " ", "member", 
+    " ", "of", " ", "the", " ", "list", " ", "in", " ", "its", " ", "own", 
+    " ", 
+    RowBox[{"box", ".", "  ", "This"}], " ", "is", " ", "useful", " ", "for", 
+    " ", "seeing", " ", "exactly", " ", "what", " ", "is", " ", "in", " ", 
+    "a", " ", 
+    RowBox[{"list", ".", "  ", "this"}], " ", "function", " ", "is", " ", 
+    "not", " ", "directly", " ", "relevant", " ", "to", " ", "the", " ", 
+    "gcode", " ", 
+    RowBox[{"generator", "."}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"lucidlistform", "[", "list_", "]"}], " ", ":=", " ", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{
+           "list", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+          "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "list", "]"}]}], "}"}]}], 
+        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Frame", " ", "\[Rule]", " ", "All"}]}], "\[IndentingNewLine]",
+       "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"parameterstring", "[", 
+      RowBox[{"namestring_", ",", "value_"}], "]"}], " ", ":=", " ", 
+     "\[IndentingNewLine]", 
+     RowBox[{"namestring", " ", "<>", " ", "\[IndentingNewLine]", 
+      RowBox[{"ToString", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Round", "[", 
+         RowBox[{"value", ",", 
+          RowBox[{"10", "^", 
+           RowBox[{"-", "4"}]}]}], "]"}], " ", "//", "N"}], 
+       "\[IndentingNewLine]", "]"}], "<>", " ", "\"\< \>\""}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "I", " ", "have", " ", "this", " ", "function", " ", "in", " ", "place", 
+      " ", "in", " ", "case", " ", "different", " ", "parameters", " ", 
+      "need", " ", "to", " ", "be", " ", "formatted", " ", "with", " ", 
+      "different", " ", "precision", " ", "numbers"}], "*)"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", 
+     RowBox[{"drillevent", "[", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"x", ":"}], "*)"}], " ", 
+      RowBox[{",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"y", ":"}], "*)"}], " ", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"zfinal", ":"}], "*)"}], "  ", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"zretract", ":"}], "*)"}], " ", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"feedspeed", ":"}], "*)"}], " ", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"peckdepth", ":"}], "*)"}], " ", ","}], " ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", "ztraverse", "*)"}], " ", "\[IndentingNewLine]", "]"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"drillevent", "[", 
+      RowBox[{
+      "x_", " ", ",", "y_", " ", ",", " ", "zfinal_", ",", " ", "zretract_", 
+       ",", " ", "feedspeed_", ",", "peckdepth_", ",", " ", "ztraverse_"}], 
+      "]"}], " ", ":=", " ", "\[IndentingNewLine]", 
+     RowBox[{"StringJoin", " ", "@", "\[IndentingNewLine]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"\"\<G00 \>\"", ",", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Z\>\"", ",", "ztraverse"}], "]"}], ",", 
+        "\"\<\\t\\n\>\"", " ", ",", " ", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", "\"\<G00 \>\"", ",", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<X\>\"", ",", "x"}], "]"}], ",", " ", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Y\>\"", ",", "y"}], "]"}], " ", ",", "\"\<\\t\\n\>\"", 
+        " ", ",", " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        "\"\<G00 \>\"", ",", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Z\>\"", ",", "zretract"}], "]"}], ",", "\"\<\\t\\n\>\"",
+         " ", ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        "\"\<G83 \>\"", " ", ",", "\[IndentingNewLine]", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<X\>\"", ",", "x"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Y\>\"", ",", "y"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Z\>\"", ",", "zfinal"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<R\>\"", ",", "zretract"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<F\>\"", ",", "feedspeed"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Q\>\"", ",", "peckdepth"}], "]"}], ",", 
+        "\"\<\\t\\n\>\"", ",", " ", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", " ", "\"\<G00 \>\"", ",", " ", 
+        RowBox[{"parameterstring", "[", 
+         RowBox[{"\"\<Z\>\"", ",", "ztraverse"}], "]"}], ",", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", "\"\<\\n\>\""}], 
+       "\[IndentingNewLine]", "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"drillpoints", "[", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"zfinal", ":"}], "*)"}], "  ", 
+      RowBox[{",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"zretract", ":"}], "*)"}], " ", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"feedspeed", ":"}], "*)"}], " ", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"peckdepth", ":"}], "*)"}], " ", ","}], " ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", "ztraverse", "*)"}], " ", "\[IndentingNewLine]", "]"}], 
+     " ", "@"}], " ", "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "this", " ", "function", " ", "extracts", " ", "all", " ", "pairs", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y"}], "}"}], " ", "occuring", " ", "within", " ", 
+     "Point", " ", "constructs", " ", "within", " ", "the", " ", "input", " ", 
+     RowBox[{"object", "."}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"extractlistofpoints", "[", "inputobject_", "]"}], " ", ":=", 
+     "  ", 
+     RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Cases", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", "inputobject", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"point_", "?", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Head", "[", "#", "]"}], " ", "\[Equal]", " ", 
+              "Point"}], " ", "&"}], ")"}]}], " ", "\[RuleDelayed]", "   ", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Cases", "[", "\[IndentingNewLine]", 
+           RowBox[{"point", ",", "\[IndentingNewLine]", 
+            RowBox[{"xy_", "?", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"MatchQ", "[", 
+                RowBox[{"#", ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"_", "?", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"NumericQ", "[", "#", "]"}], "&"}], ")"}]}], ",", 
+                   " ", 
+                   RowBox[{"_", "?", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"NumericQ", "[", "#", "]"}], "&"}], ")"}]}]}], 
+                  "}"}]}], "]"}], "&"}], ")"}]}], ",", "\[IndentingNewLine]", 
+            "Infinity"}], "\[IndentingNewLine]", "]"}]}], ",", 
+         "\[IndentingNewLine]", "Infinity"}], "\[IndentingNewLine]", "]"}], 
+       ",", "\[IndentingNewLine]", "1"}], "\[IndentingNewLine]", "]"}]}], " ",
+     ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "this", " ", "function", " ", "extracts", " ", "all", " ", "pairs", " ", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "y"}], "}"}], " ", "occuring", " ", "within", " ", 
+      "Point", " ", "constructs", " ", "within", " ", "the", " ", "input", 
+      " ", 
+      RowBox[{"object", ".", "  ", "This"}], " ", "function", " ", "outputs", 
+      " ", "a", " ", "list", " ", "of", " ", "drillevents"}], ",", " ", 
+     RowBox[{"one", " ", "for", " ", "each", " ", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "y"}], "}"}], " ", "pair", " ", 
+      RowBox[{"extracted", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"drillpoints", "[", 
+       RowBox[{
+       "zfinal_", ",", " ", "zretract_", ",", " ", "feedspeed_", ",", 
+        "peckdepth_", ",", " ", "ztraverse_"}], "]"}], "[", "inputobject_", 
+      "]"}], " ", ":=", "\[IndentingNewLine]", 
+     RowBox[{"Block", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", "listofpositions", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"listofpositions", " ", "=", " ", 
+         RowBox[{"extractlistofpoints", "[", "inputobject", "]"}]}], " ", ";",
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Table", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"drillevent", "[", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"x", ":"}], "*)"}], 
+           RowBox[{
+            RowBox[{
+            "xy", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",",
+             "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"y", ":"}], "*)"}], " ", 
+            RowBox[{
+            "xy", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], ",",
+             "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"zfinal", ":"}], "*)"}], "  ", "zfinal", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"zretract", ":"}], "*)"}], " ", "zretract", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"feedspeed", ":"}], "*)"}], " ", "feedspeed", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"peckdepth", ":"}], "*)"}], " ", "peckdepth", ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", "ztraverse", "*)"}], " ", "ztraverse"}], 
+           "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"xy", ",", "listofpositions"}], "}"}]}], 
+         "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"makecamfile", "[", 
+      RowBox[{"machiningeventlist_", ",", "filenumber_"}], "]"}], " ", ":=", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Block", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "camfilename", " ", ",", "camfilepath", ",", "stringtoexport"}], 
+        "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"camfilename", " ", "=", "  ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"StringTake", "[", 
+             RowBox[{"#", ",", 
+              RowBox[{"-", "8"}]}], "]"}], "&"}], " ", "@", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"PaddedForm", "[", 
+             RowBox[{"filenumber", ",", 
+              RowBox[{"{", 
+               RowBox[{"8", ",", "0"}], "}"}], ",", 
+              RowBox[{"NumberPoint", " ", "\[Rule]", " ", "\"\<\>\""}], ",", 
+              RowBox[{"NumberPadding", " ", "\[Rule]", " ", "\"\<0\>\""}], 
+              ",", 
+              RowBox[{"SignPadding", "\[Rule]", "False"}], ",", 
+              RowBox[{"NumberSigns", " ", "\[Rule]", " ", 
+               RowBox[{"{", 
+                RowBox[{"\"\<\>\"", ",", "\"\<\>\""}], "}"}]}]}], "]"}], 
+            "]"}]}], "<>", " ", "\"\<.CAM\>\""}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"camfilepath", " ", "=", " ", 
+         RowBox[{"FileNameJoin", " ", "@", " ", 
+          RowBox[{"{", 
+           RowBox[{"camfiledirectory", ",", " ", "camfilename"}], "}"}]}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"stringtoexport", " ", "=", " ", 
+         RowBox[{"camfilepreamble", "  ", "<>", " ", 
+          RowBox[{"StringJoin", "[", "machiningeventlist", "]"}]}]}], " ", 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"StringCount", "[", 
+            RowBox[{"stringtoexport", ",", "\"\<notset\>\""}], "]"}], " ", 
+           "\[GreaterEqual]", " ", "1"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "Print", "@", " ", 
+            "\"\<ERROR making CAM file: some of the options to machining \
+event constructs were left unset\>\""}], ";", " ", 
+           RowBox[{"Return", "[", "]"}], ";"}]}], "\[IndentingNewLine]", 
+         "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", " ", 
+        RowBox[{"Export", "[", 
+         RowBox[{"camfilepath", ",", "stringtoexport", ",", "\"\<TEXT\>\""}], 
+         "]"}], ";"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.48413845290625*^9, 3.484138499109375*^9}, {
+   3.484138572390625*^9, 3.484138639484375*^9}, {3.4841387168125*^9, 
+   3.4841387735625*^9}, 3.48413883240625*^9, {3.484138946171875*^9, 
+   3.484138968671875*^9}, {3.484139024171875*^9, 3.484139049421875*^9}, {
+   3.48413912034375*^9, 3.484139375328125*^9}, {3.48413940621875*^9, 
+   3.484139421953125*^9}, {3.484139477859375*^9, 3.484139516046875*^9}, {
+   3.484139552375*^9, 3.4841396045*^9}, {3.48413963615625*^9, 
+   3.4841398090625*^9}, {3.484139859625*^9, 3.48413990796875*^9}, {
+   3.484139982875*^9, 3.484139983859375*^9}, {3.48414002009375*^9, 
+   3.484140124171875*^9}, {3.48414016634375*^9, 3.484140171234375*^9}, {
+   3.4841402940625*^9, 3.484140297203125*^9}, {3.4841403401875*^9, 
+   3.4841404138125*^9}, 3.48414045890625*^9, {3.484151568*^9, 
+   3.484151584953125*^9}, {3.484153379046875*^9, 3.484153387453125*^9}, {
+   3.484153445375*^9, 3.48415358646875*^9}, {3.48415363521875*^9, 
+   3.484153662296875*^9}, 3.4841541060625*^9, {3.484154373734375*^9, 
+   3.484154415640625*^9}, {3.484154457875*^9, 3.48415449875*^9}, {
+   3.48415453503125*^9, 3.484154890421875*^9}, {3.48415509925*^9, 
+   3.484155126265625*^9}, {3.484155168328125*^9, 3.484155171671875*^9}, {
+   3.484155220984375*^9, 3.4841552578125*^9}, {3.4841553159375*^9, 
+   3.484155334890625*^9}, {3.48415542075*^9, 3.48415546759375*^9}, {
+   3.484155516859375*^9, 3.48415552084375*^9}, {3.484155555828125*^9, 
+   3.484155558828125*^9}, 3.484155613828125*^9, {3.48415567315625*^9, 
+   3.484155673328125*^9}, {3.48415585734375*^9, 3.484155929015625*^9}, {
+   3.48415604409375*^9, 3.4841561000625*^9}, {3.484156134890625*^9, 
+   3.484156138609375*^9}, {3.484156451359375*^9, 3.48415658859375*^9}, {
+   3.48415801084375*^9, 3.48415818896875*^9}, {3.48415825015625*^9, 
+   3.48415828359375*^9}, {3.484158464875*^9, 3.48415848275*^9}, 
+   3.484158650109375*^9, {3.4841587059375*^9, 3.484158720078125*^9}, {
+   3.484158844734375*^9, 3.484158927171875*^9}, {3.484159223796875*^9, 
+   3.484159225984375*^9}, {3.48415929990625*^9, 3.484159344609375*^9}, {
+   3.48415939809375*^9, 3.48415959484375*^9}, {3.48416006665625*^9, 
+   3.484160096390625*^9}, {3.484160591609375*^9, 3.484160668640625*^9}, {
+   3.484160766453125*^9, 3.484160794625*^9}, {3.48416148753125*^9, 
+   3.484161498109375*^9}, {3.484161700015625*^9, 3.4841617003125*^9}, {
+   3.485275233984375*^9, 3.48527530284375*^9}, 3.485275345609375*^9, {
+   3.485280453046875*^9, 3.48528046853125*^9}, {3.4855328095625*^9, 
+   3.485532810015625*^9}, {3.48553305790625*^9, 3.48553305815625*^9}, {
+   3.48553313490625*^9, 3.485533137984375*^9}, {3.485533179890625*^9, 
+   3.4855331800625*^9}}]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{1592, 1038},
+WindowMargins->{{44, Automatic}, {Automatic, -8}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 740, 15, 112, "Input"],
+Cell[1288, 37, 16693, 344, 2412, "Input",
+ InitializationCell->True]
+}
+]
+*)
+
+(* End of internal cache information *)

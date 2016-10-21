@@ -1,0 +1,255 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      9981,        245]
+NotebookOptionsPosition[      9664,        230]
+NotebookOutlinePosition[     10042,        246]
+CellTagsIndexPosition[      9999,        243]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "this", " ", "is", " ", "designed", " ", "to", " ", "be", " ", "passed", 
+    " ", "to", " ", "to", " ", 
+    RowBox[{"Sort", "[", "]"}], " ", "as", " ", "the", " ", "sorting", " ", 
+    "function"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"multicolumnsortingfunction", "[", "sortorder_", "]"}], "[", 
+      RowBox[{"a_", ",", "b_"}], "]"}], " ", ":=", " ", "\[IndentingNewLine]", 
+     RowBox[{"Block", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"result", " ", "=", " ", 
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{"True", ",", 
+            RowBox[{"Length", "[", "sortorder", "]"}]}], "]"}]}], ",", "j"}], 
+        "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+         "result", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+         " ", "=", " ", 
+         RowBox[{"OrderedQ", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"a", "\[LeftDoubleBracket]", 
+             RowBox[{
+             "sortorder", "\[LeftDoubleBracket]", "1", 
+              "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}], ",", 
+            RowBox[{"b", "\[LeftDoubleBracket]", 
+             RowBox[{
+             "sortorder", "\[LeftDoubleBracket]", "1", 
+              "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}]}], "}"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"j", "=", "2"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"While", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"j", "\[LessEqual]", " ", 
+            RowBox[{"Length", "[", "sortorder", "]"}]}], 
+           "\[IndentingNewLine]", "&&", 
+           RowBox[{
+            RowBox[{"a", "\[LeftDoubleBracket]", " ", 
+             RowBox[{"sortorder", "\[LeftDoubleBracket]", 
+              RowBox[{"j", "-", "1"}], "\[RightDoubleBracket]"}], " ", 
+             "\[RightDoubleBracket]"}], " ", "\[Equal]", " ", 
+            RowBox[{"b", "\[LeftDoubleBracket]", " ", 
+             RowBox[{"sortorder", "\[LeftDoubleBracket]", 
+              RowBox[{"j", "-", "1"}], "\[RightDoubleBracket]"}], " ", 
+             "\[RightDoubleBracket]"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+            "result", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}], 
+            "=", 
+            RowBox[{"OrderedQ", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"a", "\[LeftDoubleBracket]", 
+                RowBox[{
+                "sortorder", "\[LeftDoubleBracket]", "j", 
+                 "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}], ",", 
+               RowBox[{"b", "\[LeftDoubleBracket]", 
+                RowBox[{
+                "sortorder", "\[LeftDoubleBracket]", "j", 
+                 "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}]}], 
+              "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"j", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", 
+         RowBox[{"And", "@@", "result"}], "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "this", " ", "is", " ", "almost", " ", "the", " ", "same", " ", "as", 
+      " ", "multicolumnsortingfunction"}], ",", " ", "except", ",", " ", 
+     "now", ",", " ", 
+     RowBox[{
+     "sortorder", " ", "is", " ", "a", " ", "list", " ", "of", " ", 
+      "positions", " ", 
+      RowBox[{"(", 
+       RowBox[{"arbitrary", ",", " ", 
+        RowBox[{
+         RowBox[{"not", " ", "just", " ", "first"}], "-", 
+         RowBox[{"level", " ", "indices"}]}]}], ")"}], " ", "which", " ", 
+      "are", " ", "to", " ", "be", " ", "checked", " ", "and", " ", "sorted", 
+      " ", 
+      RowBox[{"by", ".", "\[IndentingNewLine]", "For"}], " ", "instance", " ",
+       "sortorder", " ", "might", " ", "be", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", "1", "}"}], ",", 
+        RowBox[{"{", "2", "}"}], ",", 
+        RowBox[{"{", "3", "}"}]}], "}"}]}], ",", " ", 
+     RowBox[{
+     "which", " ", "would", " ", "give", " ", "the", " ", "same", " ", 
+      "results", " ", "as", " ", 
+      RowBox[{"multicolumnsortingfunction", "[", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", "3"}], "}"}], "]"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"AllI", "'"}], "ve", " ", "done", " ", "is", " ", "replace", 
+      " ", 
+      RowBox[{"argument", "\[LeftDoubleBracket]", 
+       RowBox[{
+       "sortorder", "\[LeftDoubleBracket]", "dummy", 
+        "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}], " ", "with", 
+      " ", 
+      RowBox[{"argument", "\[LeftDoubleBracket]", 
+       RowBox[{"Sequence", "@@", 
+        RowBox[{
+        "sortorder", "\[LeftDoubleBracket]", "dummy", 
+         "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "I", " ", "could", " ", 
+      "probably", " ", "get", " ", "this", " ", "function", " ", "to", " ", 
+      "accept", " ", "a", " ", "list", " ", "of", " ", "column", " ", 
+      "entries", " ", "and", " ", "completely", " ", "serve", " ", "all", " ",
+       "the", " ", "purposes", " ", "of", " ", "the", " ", 
+      RowBox[{"multicolumnsortingfunction", "."}]}]}], "\[IndentingNewLine]", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "multipartsortingfunction", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"multipartsortingfunction", "[", "sortorder_", "]"}], " ", "[", 
+      RowBox[{"a_", ",", "b_"}], "]"}], " ", ":=", "\[IndentingNewLine]", 
+     RowBox[{"Block", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"result", " ", "=", " ", 
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{"True", ",", 
+            RowBox[{"Length", "[", "sortorder", "]"}]}], "]"}]}], ",", "j"}], 
+        "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+         "result", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+         " ", "=", " ", 
+         RowBox[{"OrderedQ", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"a", "\[LeftDoubleBracket]", 
+             RowBox[{"Sequence", "@@", 
+              RowBox[{
+              "sortorder", "\[LeftDoubleBracket]", "1", 
+               "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], ",", 
+            RowBox[{"b", "\[LeftDoubleBracket]", 
+             RowBox[{"Sequence", "@@", 
+              RowBox[{
+              "sortorder", "\[LeftDoubleBracket]", "1", 
+               "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}]}], 
+           "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"j", "=", "2"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"While", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"j", "\[LessEqual]", " ", 
+            RowBox[{"Length", "[", "sortorder", "]"}]}], 
+           "\[IndentingNewLine]", "&&", 
+           RowBox[{
+            RowBox[{"a", "\[LeftDoubleBracket]", " ", 
+             RowBox[{"Sequence", "@@", 
+              RowBox[{"sortorder", "\[LeftDoubleBracket]", 
+               RowBox[{"j", "-", "1"}], "\[RightDoubleBracket]"}]}], " ", 
+             "\[RightDoubleBracket]"}], " ", "\[Equal]", " ", 
+            RowBox[{"b", "\[LeftDoubleBracket]", " ", 
+             RowBox[{"Sequence", "@@", 
+              RowBox[{"sortorder", "\[LeftDoubleBracket]", 
+               RowBox[{"j", "-", "1"}], "\[RightDoubleBracket]"}]}], " ", 
+             "\[RightDoubleBracket]"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+            "result", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}], 
+            "=", 
+            RowBox[{"OrderedQ", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"a", "\[LeftDoubleBracket]", 
+                RowBox[{"Sequence", "@@", 
+                 RowBox[{
+                 "sortorder", "\[LeftDoubleBracket]", "j", 
+                  "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], ",", 
+               RowBox[{"b", "\[LeftDoubleBracket]", 
+                RowBox[{"Sequence", "@@", 
+                 RowBox[{
+                 "sortorder", "\[LeftDoubleBracket]", "j", 
+                  "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}]}], 
+              "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"j", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", 
+         RowBox[{"And", "@@", "result"}], "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}]}], ";"}]}]}]], "Input",
+ InitializationCell->True]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{615, 750},
+WindowMargins->{{49, Automatic}, {Automatic, 62}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 9115, 208, 992, "Input",
+ InitializationCell->True]
+}
+]
+*)
+
+(* End of internal cache information *)
+

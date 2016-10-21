@@ -1,0 +1,15 @@
+cadhelperdirectory = "C:\\Documents and Settings\\Neil Jackson\\My Documents\\projects - interests - hobbies\\mathematica extensions\\Mathematica CAD stuff\\" (*this is the directory containing the several mathematica files which contain the functions I use for CAD projects*);
+pathofdata = NotebookDirectory[] <> "data.xls";
+pathofcomputeddata = NotebookDirectory[] <> "computeddata.xls";
+
+(*this loads all the files in the cadhelperdirectory*)
+SetDirectory[cadhelperdirectory];
+filenames = FileNames[];
+
+For[
+i=1, i<= Length[filenames ], i++,
+If[
+StringMatchQ[filenames[[i]],___ ~~ ".m"],
+Get[cadhelperdirectory <> filenames[[i]]];
+];
+];

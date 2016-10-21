@@ -1,0 +1,786 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     36649,        777]
+NotebookOptionsPosition[     36330,        762]
+NotebookOutlinePosition[     36708,        778]
+CellTagsIndexPosition[     36665,        775]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"LengthConversionData", " ", "=", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "Each", " ", "element", " ", "of", " ", "this", " ", "list", " ", "is", 
+       " ", "of", " ", "the", " ", "form", " ", 
+       RowBox[{"{", 
+        RowBox[{"names", ",", "standardunitpernamedunit"}], "}"}]}], ",", " ", 
+      RowBox[{
+      "where", " ", "names", " ", "is", " ", "a", " ", "list", " ", "of", " ",
+        "strings"}], ",", " ", 
+      RowBox[{
+      "each", " ", "string", " ", "being", " ", "an", " ", "allowable", " ", 
+       "name", " ", "for", " ", "that", " ", 
+       RowBox[{"unit", ".", "  ", "the"}], " ", "standard", " ", "unit", " ", 
+       "here", " ", "is", " ", "the", " ", 
+       RowBox[{"printer", "'"}], "s", " ", "point"}], ",", " ", 
+      RowBox[{
+      "as", " ", "you", " ", "can", " ", "see", " ", "from", " ", "the", " ", 
+       "first", " ", 
+       RowBox[{"entry", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<printer's point\>\"", ",", "\"\<printer's points\>\"", ",", 
+          "\"\<pt\>\"", ",", "\"\<pts\>\""}], "}"}], ",", "1"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<inch\>\"", ",", "\"\<inches\>\"", ",", "\"\<in\>\""}], 
+         "}"}], ",", "72"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<centimeter\>\"", ",", "\"\<cm\>\""}], "}"}], ",", 
+        RowBox[{"72", "/", "2.54"}]}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<millimeter\>\"", ",", "\"\<mm\>\""}], "}"}], ",", 
+        RowBox[{"72", "/", "25.4"}]}], "}"}]}], "\[IndentingNewLine]", 
+     "}"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetAttributes", "[", 
+   RowBox[{"ConvertLength", ",", "Listable"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConvertLength", "[", 
+    RowBox[{
+     RowBox[{"number_", "?", "NumericQ"}], ",", "sourceunitname_String", ",", 
+     "targetunitname_String"}], "]"}], " ", ":=", "\[IndentingNewLine]", 
+   RowBox[{"Block", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"i", ",", 
+       RowBox[{"StandardUnitsPerSourceUnit", " ", "=", " ", "Null"}], ",", 
+       " ", 
+       RowBox[{"StandardUnitsPerTargetUnit", " ", "=", " ", "Null"}]}], "}"}],
+      ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "this", " ", "For", " ", "loop", " ", "looks", " ", "at", " ", 
+        "LengthConversionData", " ", "and", " ", "looks", " ", "up", " ", 
+        "the", " ", "proper", " ", "values", " ", "for", " ", 
+        "StandardUnitsPerSourceUnit", " ", "and", " ", 
+        "StandardUnitsPerTargetUnit"}], ",", " ", 
+       RowBox[{
+       "based", " ", "on", " ", "the", " ", "strings", " ", "given", " ", 
+        "as", " ", "arguments"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"For", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"i", "\[LessEqual]", " ", 
+          RowBox[{"Length", " ", "[", "LengthConversionData", "]"}]}], " ", 
+         "\[IndentingNewLine]", "&&", "  ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"StandardUnitsPerSourceUnit", " ", "==", " ", "Null"}], 
+           "  ", "||", " ", 
+           RowBox[{"StandardUnitsPerTargetUnit", " ", "==", " ", "Null"}]}], 
+          ")"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Count", "[", 
+             RowBox[{
+              RowBox[{
+              "LengthConversionData", "\[LeftDoubleBracket]", "i", 
+               "\[RightDoubleBracket]"}], ",", "sourceunitname", ",", "2"}], 
+             "]"}], " ", "\[GreaterEqual]", " ", "1"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"StandardUnitsPerSourceUnit", " ", "=", " ", 
+            RowBox[{"LengthConversionData", "\[LeftDoubleBracket]", 
+             RowBox[{"i", ",", "2"}], "\[RightDoubleBracket]"}]}]}], 
+          "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"If", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Count", "[", 
+             RowBox[{
+              RowBox[{
+              "LengthConversionData", "\[LeftDoubleBracket]", "i", 
+               "\[RightDoubleBracket]"}], ",", "targetunitname", ",", "2"}], 
+             "]"}], " ", "\[GreaterEqual]", " ", "1"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"StandardUnitsPerTargetUnit", " ", "=", " ", 
+            RowBox[{"LengthConversionData", "\[LeftDoubleBracket]", 
+             RowBox[{"i", ",", "2"}], "\[RightDoubleBracket]"}]}]}], 
+          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
+       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"StandardUnitsPerSourceUnit", " ", "==", " ", "Null"}], "  ",
+          "||", " ", 
+         RowBox[{"StandardUnitsPerTargetUnit", " ", "==", " ", "Null"}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{
+        "Print", "[", 
+         "\"\<error while converting length units: could not recognize the \
+units\>\"", "]"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]",
+       "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", 
+       RowBox[{"number", " ", "*", "  ", 
+        RowBox[{
+        "StandardUnitsPerSourceUnit", "/", "StandardUnitsPerTargetUnit"}]}], 
+       "]"}], ";"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetAttributes", "[", 
+   RowBox[{"ExportSizedDrawing", ",", "HoldFirst"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ExportSizedDrawing", "[", "\[IndentingNewLine]", 
+     RowBox[{"drawing_", ",", " ", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "a", " ", "list", " ", "of", " ", "graphics", " ", "primitives"}], 
+        ",", "  ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"or", " ", "possibly", " ", "a", " ", 
+           RowBox[{"Graphics", "[", "]"}], " ", "object"}], ",", " ", 
+          RowBox[{
+          "from", " ", "which", " ", "we", " ", "can", " ", "extract", " ", 
+           "the", " ", "list", " ", "of", " ", "graphics", " ", 
+           "primitves"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+      "canonicalregion_", ",", 
+      RowBox[{"(*", "  ", 
+       RowBox[{"the", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Xmin", ",", "Xmax"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Ymin", ",", "Ymax"}], "}"}]}], "}"}], " ", "of", " ", 
+        "the", " ", "canonical", " ", "region", " ", "to", " ", "be", " ", 
+        "printed", " ", "into", " ", "the", " ", "pdf"}], "*)"}], 
+      "\[IndentingNewLine]", "physicalsize_", " ", ",", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"the", " ", 
+         RowBox[{"{", 
+          RowBox[{"Xextent", ",", " ", "Yextent"}], "}"}], " ", "of", " ", 
+         "the", " ", "pdf", " ", "page"}], ",", " ", 
+        RowBox[{
+        "in", " ", "the", " ", "units", " ", "given", " ", "by", " ", "the", 
+         " ", "string", " ", "in", " ", "the", " ", "next", " ", "argument"}],
+         ",", " ", 
+        RowBox[{
+        "onto", " ", "which", " ", "the", " ", "region", " ", "specified", 
+         " ", "by", " ", "canonicalregion", " ", "is", " ", "to", " ", "be", 
+         " ", "stretched"}]}], "*)"}], "\[IndentingNewLine]", 
+      "unitsofphysicalregion_", " ", ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "a", " ", "string", " ", "containing", " ", "a", " ", "units", " ", 
+        "key", " ", "word", " ", "such", " ", "as", " ", "\"\<inch\>\"", " ", 
+        "\"\<mm\>\"", " ", "\"\<meter\>\"", " ", "etc"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"filename_:", "Null"}]}], "\[IndentingNewLine]", "]"}], " ", ":=",
+     "\[IndentingNewLine]", 
+    RowBox[{"Block", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"urlofdrawing", ",", "urlofviewer", ",", "commandstring"}], 
+       "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "ATTEMPTING", " ", "TO", " ", "EXTRACT", " ", "graphics", " ", 
+         "primitives", " ", "from", " ", 
+         RowBox[{"drawing", ".", "  ", 
+          RowBox[{"Can", "'"}]}], "t", " ", "make", " ", "it", " ", "work", 
+         " ", 
+         RowBox[{"easily", ".", "  ", "For"}], "  ", "now"}], ",", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+          "drawing", " ", "must", " ", "be", " ", "a", " ", "list", " ", "of",
+            " ", "graphics", " ", "primitves", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", "drawing"}], " ", 
+          "=", " ", 
+          RowBox[{"Replace", "[", "\[IndentingNewLine]", 
+           RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+             "x_Graphics", "[", "\[IndentingNewLine]", "args___", 
+              "\[IndentingNewLine]", "]"}], " ", "\[RuleDelayed]", " ", 
+             RowBox[{"DeleteCases", "[", 
+              RowBox[{
+               RowBox[{"{", "args", "}"}], ",", "Rule"}], "]"}]}]}], 
+           "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{"drawing", " ", "=", " ", 
+          RowBox[{"DeleteCases", "[", "\[IndentingNewLine]", 
+           RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+            RowBox[{"Rule", "[", "___", "]"}]}], "\[IndentingNewLine]", 
+           "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"Return", "[", 
+          RowBox[{"InputForm", "[", "drawing", "]"}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"drawing", " ", "=", " ", 
+          RowBox[{"DeleteCases", "[", "\[IndentingNewLine]", 
+           RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Rule", "[", 
+               RowBox[{"ImagePadding", ",", "_"}], "]"}], " ", ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Rule", "[", 
+               RowBox[{"ImageMargins", ",", "_"}], "]"}], " ", ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Rule", "[", 
+               RowBox[{"PlotRange", ",", "_"}], "]"}]}], 
+             "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+            "Infinity"}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+        "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", "*)"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "PUT", " ", "THIS", " ", "IN", "  ", "A", " ", "SEPARATE", " ", 
+         "FUNCTION"}], ";", " ", 
+        RowBox[{
+         RowBox[{
+         "IT", " ", "CAN", " ", "GET", " ", "ANNOYING", " ", "TO", " ", 
+          "ALWAYS", " ", "RUN", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"this", " ", "closes", " ", "acrobat", " ", "reader"}], 
+            ",", " ", 
+            RowBox[{"if", " ", "its", " ", "open"}], ",", " ", 
+            RowBox[{
+            "so", " ", "that", " ", "the", " ", "file", " ", "can", " ", "be",
+              " ", "written"}]}], "*)"}], "\[IndentingNewLine]", 
+          "commandstring"}], " ", "=", " ", 
+         "\"\<taskkill /FI \\\"WINDOWTITLE eq drawing.pdf - Adobe Acrobat \
+Professional\\\"\>\""}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "commandstring", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "Run", "[", 
+         "\"\<taskkill /FI \\\"WINDOWTITLE eq drawing.pdf - Adobe Acrobat \
+Professional\\\"\>\"", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "this", " ", "pause", " ", "is", " ", "necessary", " ", "in", " ", 
+          "order", " ", "to", " ", "wait", " ", "for", " ", "taskkill", " ", 
+          "to", " ", "complete"}], "*)"}], 
+        RowBox[{"Pause", "[", "0.3", "]"}], ";"}], "\[IndentingNewLine]", 
+       "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"urlofdrawingfile", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], " ", "\[IndentingNewLine]", 
+         "<>", "  ", 
+         RowBox[{"If", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"StringQ", "[", "filename", "]"}], ",", " ", 
+           "\[IndentingNewLine]", " ", "filename", ",", "\[IndentingNewLine]",
+            " ", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"HoldForm", "[", "drawing", "]"}], "]"}]}], 
+          "\[IndentingNewLine]", "]"}], " ", "\[IndentingNewLine]", "<>", 
+         " ", "\"\<.pdf\>\""}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", "\[IndentingNewLine]", 
+        RowBox[{"urlofdrawingfile", ",", "\[IndentingNewLine]", 
+         RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+          RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+           RowBox[{"ImageMargins", " ", "\[Rule]", " ", "0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"ImagePadding", " ", "\[Rule]", " ", "0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotRange", " ", "\[Rule]", " ", "canonicalregion"}], ",",
+            "\[IndentingNewLine]", 
+           RowBox[{"AspectRatio", " ", "\[Rule]", " ", 
+            RowBox[{
+             RowBox[{
+             "physicalsize", "\[LeftDoubleBracket]", "2", 
+              "\[RightDoubleBracket]"}], "/", 
+             RowBox[{
+             "physicalsize", "\[LeftDoubleBracket]", "1", 
+              "\[RightDoubleBracket]"}]}]}]}], " ", 
+          RowBox[{"(*", 
+           RowBox[{
+           "The", " ", "AspectRatio", " ", "option", " ", "for", " ", 
+            "Graphics", " ", "specifies", " ", "the", " ", "ratio", " ", "of",
+             " ", "height", " ", "to", " ", "width", " ", "of", " ", "the", 
+            " ", "output", " ", 
+            RowBox[{"graphic", "."}]}], "*)"}], "\[IndentingNewLine]", "]"}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"ImageSize", " ", "\[Rule]", "\[IndentingNewLine]", " ", 
+          RowBox[{"ConvertLength", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+            "physicalsize", "\[LeftDoubleBracket]", "1", 
+             "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+            "unitsofphysicalregion", ",", " ", "\"\<printer's points\>\""}], 
+           "  ", "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+        "]"}], ";"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "The", " ", "Export", " ", "function", " ", "will", " ", "generate", 
+        " ", "an", " ", "image", " ", "with", " ", "the", " ", "size", " ", 
+        "specified", " ", "by", " ", "ImageSize"}], ",", " ", 
+       RowBox[{
+       "but", " ", "it", " ", "will", " ", "not", " ", "change", " ", "the", 
+        " ", "aspect", " ", "ratio", " ", "of", " ", "the", " ", 
+        RowBox[{"graphic", ".", "  ", "Rather"}]}], ",", " ", 
+       RowBox[{
+       "it", " ", "scales", " ", "the", " ", "graphic", " ", "by", " ", "the",
+         " ", "same", " ", "factor", " ", "in", " ", "x", " ", "and", " ", 
+        "in", " ", "y", " ", "to", " ", "get", " ", "it", " ", "to", " ", 
+        "be", " ", "as", " ", "big", " ", "as", " ", "possible", " ", 
+        "within", " ", "the", " ", "ImageSize", " ", 
+        RowBox[{"area", ".", "  ", "In"}], " ", "other", " ", "words"}], ",", 
+       " ", 
+       RowBox[{
+       "white", " ", "bars", " ", "might", " ", "be", " ", "left", " ", "on", 
+        " ", "the", " ", "sides", " ", "if", " ", "the", " ", "aspect", " ", 
+        "ratio", " ", "of", " ", "ImageSize", " ", "is", " ", "not", " ", 
+        "the", " ", "same", " ", "as", " ", "the", " ", "aspect", " ", 
+        "ratio", " ", "of", " ", "the", " ", 
+        RowBox[{"graphic", ".", "  ", "Thus"}]}], ",", " ", 
+       RowBox[{
+       "even", " ", "though", " ", "Export", " ", "will", " ", "accept", " ", 
+        "an", " ", "ImageSize", " ", "option", " ", "value", " ", "that", " ",
+         "is", " ", "a", " ", "pair", " ", "of", " ", "numbers", " ", 
+        RowBox[{"(", 
+         RowBox[{"width", " ", "and", " ", "height"}], ")"}]}], ",", " ", 
+       RowBox[{
+       "I", " ", "am", " ", "going", " ", "to", " ", "just", " ", "give", " ",
+         "it", " ", "a", " ", "single", " ", "number"}], ",", " ", 
+       RowBox[{
+       "which", " ", "it", " ", "will", " ", "use", " ", "as", " ", "width"}],
+        ",", " ", 
+       RowBox[{
+       "with", " ", "the", " ", "hiehgt", " ", "being", " ", "automatically", 
+        " ", "determined", " ", "by", " ", "the", " ", "aspect", " ", "ratio",
+         " ", "of", " ", "the", " ", 
+        RowBox[{"graphic", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "urlofviewer", " ", "=", " ", 
+        "\"\<C:\\\\Program Files\\\\Adobe\\\\Acrobat \
+8.0\\\\Acrobat\\\\Acrobat.exe\>\""}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"commandstring", " ", "=", " ", 
+        RowBox[{
+        "\"\<start \\\"\>\"", " ", "<>", "   ", "urlofviewer", " ", "<>", 
+         "  ", "\"\<\\\" \\\"\>\"", " ", "<>", " ", "urlofdrawingfile", " ", "<>",
+          " ", "\"\<\\\"\>\""}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "this", " ", "opens", " ", "the", " ", "image", " ", "for", " ", 
+         "viewing"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", "commandstring", "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Run", "[", "commandstring", "]"}], ";"}], 
+      "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "ExportSizedDrawing2", " ", "works", " ", "exactly", " ", "like", " ", 
+     "ExportSizedDrawing", " ", "cexcept", " ", "you", " ", "can", " ", 
+     "specify", " ", "the", " ", "entire", " ", "output", " ", "file", " ", 
+     "url"}], ",", " ", 
+    RowBox[{"includingn", " ", "extension"}], ",", " ", 
+    RowBox[{"in", " ", "the", " ", "argument"}], ",", " ", 
+    RowBox[{
+    "instaead", " ", "of", " ", "just", " ", "the", " ", "filenamew"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetAttributes", "[", 
+   RowBox[{"ExportSizedDrawing2", ",", "HoldFirst"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExportSizedDrawing2", "[", "\[IndentingNewLine]", 
+    RowBox[{"drawing_", ",", " ", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "a", " ", "list", " ", "of", " ", "graphics", " ", "primitives"}], ",",
+        "  ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"or", " ", "possibly", " ", "a", " ", 
+          RowBox[{"Graphics", "[", "]"}], " ", "object"}], ",", " ", 
+         RowBox[{
+         "from", " ", "which", " ", "we", " ", "can", " ", "extract", " ", 
+          "the", " ", "list", " ", "of", " ", "graphics", " ", 
+          "primitves"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+     "canonicalregion_", ",", 
+     RowBox[{"(*", "  ", 
+      RowBox[{"the", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Xmin", ",", "Xmax"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"Ymin", ",", "Ymax"}], "}"}]}], "}"}], " ", "of", " ", 
+       "the", " ", "canonical", " ", "region", " ", "to", " ", "be", " ", 
+       "printed", " ", "into", " ", "the", " ", "pdf"}], "*)"}], 
+     "\[IndentingNewLine]", "physicalsize_", " ", ",", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"the", " ", 
+        RowBox[{"{", 
+         RowBox[{"Xextent", ",", " ", "Yextent"}], "}"}], " ", "of", " ", 
+        "the", " ", "pdf", " ", "page"}], ",", " ", 
+       RowBox[{
+       "in", " ", "the", " ", "units", " ", "given", " ", "by", " ", "the", 
+        " ", "string", " ", "in", " ", "the", " ", "next", " ", "argument"}], 
+       ",", " ", 
+       RowBox[{
+       "onto", " ", "which", " ", "the", " ", "region", " ", "specified", " ",
+         "by", " ", "canonicalregion", " ", "is", " ", "to", " ", "be", " ", 
+        "stretched"}]}], "*)"}], "\[IndentingNewLine]", 
+     "unitsofphysicalregion_", " ", ",", 
+     RowBox[{"(*", 
+      RowBox[{
+      "a", " ", "string", " ", "containing", " ", "a", " ", "units", " ", 
+       "key", " ", "word", " ", "such", " ", "as", " ", "\"\<inch\>\"", " ", 
+       "\"\<mm\>\"", " ", "\"\<meter\>\"", " ", "etc"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"filename_:", "Null"}]}], "\[IndentingNewLine]", "]"}], " ", ":=",
+    "\[IndentingNewLine]", 
+   RowBox[{"Block", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"urlofdrawing", ",", "urlofviewer", ",", "commandstring"}], 
+      "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "ATTEMPTING", " ", "TO", " ", "EXTRACT", " ", "graphics", " ", 
+        "primitives", " ", "from", " ", 
+        RowBox[{"drawing", ".", "  ", 
+         RowBox[{"Can", "'"}]}], "t", " ", "make", " ", "it", " ", "work", 
+        " ", 
+        RowBox[{"easily", ".", "  ", "For"}], "  ", "now"}], ",", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+         "drawing", " ", "must", " ", "be", " ", "a", " ", "list", " ", "of", 
+          " ", "graphics", " ", "primitves", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", "drawing"}], " ", "=",
+          " ", 
+         RowBox[{"Replace", "[", "\[IndentingNewLine]", 
+          RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+            "x_Graphics", "[", "\[IndentingNewLine]", "args___", 
+             "\[IndentingNewLine]", "]"}], " ", "\[RuleDelayed]", " ", 
+            RowBox[{"DeleteCases", "[", 
+             RowBox[{
+              RowBox[{"{", "args", "}"}], ",", "Rule"}], "]"}]}]}], 
+          "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"drawing", " ", "=", " ", 
+         RowBox[{"DeleteCases", "[", "\[IndentingNewLine]", 
+          RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+           RowBox[{"Rule", "[", "___", "]"}]}], "\[IndentingNewLine]", 
+          "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", 
+         RowBox[{"InputForm", "[", "drawing", "]"}], "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"drawing", " ", "=", " ", 
+         RowBox[{"DeleteCases", "[", "\[IndentingNewLine]", 
+          RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Rule", "[", 
+              RowBox[{"ImagePadding", ",", "_"}], "]"}], " ", ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Rule", "[", 
+              RowBox[{"ImageMargins", ",", "_"}], "]"}], " ", ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Rule", "[", 
+              RowBox[{"PlotRange", ",", "_"}], "]"}]}], "\[IndentingNewLine]",
+             "}"}], ",", "\[IndentingNewLine]", "Infinity"}], 
+          "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+       "*)"}], "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "PUT", " ", "THIS", " ", "IN", "  ", "A", " ", "SEPARATE", " ", 
+        "FUNCTION"}], ";", " ", 
+       RowBox[{
+        RowBox[{
+        "IT", " ", "CAN", " ", "GET", " ", "ANNOYING", " ", "TO", " ", 
+         "ALWAYS", " ", "RUN", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"this", " ", "closes", " ", "acrobat", " ", "reader"}], 
+           ",", " ", 
+           RowBox[{"if", " ", "its", " ", "open"}], ",", " ", 
+           RowBox[{
+           "so", " ", "that", " ", "the", " ", "file", " ", "can", " ", "be", 
+            " ", "written"}]}], "*)"}], "\[IndentingNewLine]", 
+         "commandstring"}], " ", "=", " ", 
+        "\"\<taskkill /FI \\\"WINDOWTITLE eq drawing.pdf - Adobe Acrobat \
+Professional\\\"\>\""}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", "commandstring", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+       "Run", "[", 
+        "\"\<taskkill /FI \\\"WINDOWTITLE eq drawing.pdf - Adobe Acrobat \
+Professional\\\"\>\"", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "this", " ", "pause", " ", "is", " ", "necessary", " ", "in", " ", 
+         "order", " ", "to", " ", "wait", " ", "for", " ", "taskkill", " ", 
+         "to", " ", "complete"}], "*)"}], 
+       RowBox[{"Pause", "[", "0.3", "]"}], ";"}], "\[IndentingNewLine]", 
+      "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"urlofdrawingfile", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], " ", "\[IndentingNewLine]", "<>",
+         "  ", 
+        RowBox[{"If", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"StringQ", "[", "filename", "]"}], ",", " ", 
+          "\[IndentingNewLine]", " ", "filename", ",", "\[IndentingNewLine]", 
+          " ", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"HoldForm", "[", "drawing", "]"}], "]"}]}], 
+         "\[IndentingNewLine]", "]"}], " ", "\[IndentingNewLine]", "<>", " ", 
+        "\"\<.pdf\>\""}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", "\[IndentingNewLine]", 
+       RowBox[{"filename", ",", "\[IndentingNewLine]", 
+        RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+         RowBox[{"drawing", ",", "\[IndentingNewLine]", 
+          RowBox[{"ImageMargins", " ", "\[Rule]", " ", "0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"ImagePadding", " ", "\[Rule]", " ", "0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"PlotRange", " ", "\[Rule]", " ", "canonicalregion"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AspectRatio", " ", "\[Rule]", " ", 
+           RowBox[{
+            RowBox[{
+            "physicalsize", "\[LeftDoubleBracket]", "2", 
+             "\[RightDoubleBracket]"}], "/", 
+            RowBox[{
+            "physicalsize", "\[LeftDoubleBracket]", "1", 
+             "\[RightDoubleBracket]"}]}]}]}], " ", 
+         RowBox[{"(*", 
+          RowBox[{
+          "The", " ", "AspectRatio", " ", "option", " ", "for", " ", 
+           "Graphics", " ", "specifies", " ", "the", " ", "ratio", " ", "of", 
+           " ", "height", " ", "to", " ", "width", " ", "of", " ", "the", " ",
+            "output", " ", 
+           RowBox[{"graphic", "."}]}], "*)"}], "\[IndentingNewLine]", "]"}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"ImageSize", " ", "\[Rule]", "\[IndentingNewLine]", " ", 
+         RowBox[{"ConvertLength", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "physicalsize", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+           "unitsofphysicalregion", ",", " ", "\"\<printer's points\>\""}], 
+          "  ", "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+       "]"}], ";"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "The", " ", "Export", " ", "function", " ", "will", " ", "generate", 
+       " ", "an", " ", "image", " ", "with", " ", "the", " ", "size", " ", 
+       "specified", " ", "by", " ", "ImageSize"}], ",", " ", 
+      RowBox[{
+      "but", " ", "it", " ", "will", " ", "not", " ", "change", " ", "the", 
+       " ", "aspect", " ", "ratio", " ", "of", " ", "the", " ", 
+       RowBox[{"graphic", ".", "  ", "Rather"}]}], ",", " ", 
+      RowBox[{
+      "it", " ", "scales", " ", "the", " ", "graphic", " ", "by", " ", "the", 
+       " ", "same", " ", "factor", " ", "in", " ", "x", " ", "and", " ", "in",
+        " ", "y", " ", "to", " ", "get", " ", "it", " ", "to", " ", "be", " ",
+        "as", " ", "big", " ", "as", " ", "possible", " ", "within", " ", 
+       "the", " ", "ImageSize", " ", 
+       RowBox[{"area", ".", "  ", "In"}], " ", "other", " ", "words"}], ",", 
+      " ", 
+      RowBox[{
+      "white", " ", "bars", " ", "might", " ", "be", " ", "left", " ", "on", 
+       " ", "the", " ", "sides", " ", "if", " ", "the", " ", "aspect", " ", 
+       "ratio", " ", "of", " ", "ImageSize", " ", "is", " ", "not", " ", 
+       "the", " ", "same", " ", "as", " ", "the", " ", "aspect", " ", "ratio",
+        " ", "of", " ", "the", " ", 
+       RowBox[{"graphic", ".", "  ", "Thus"}]}], ",", " ", 
+      RowBox[{
+      "even", " ", "though", " ", "Export", " ", "will", " ", "accept", " ", 
+       "an", " ", "ImageSize", " ", "option", " ", "value", " ", "that", " ", 
+       "is", " ", "a", " ", "pair", " ", "of", " ", "numbers", " ", 
+       RowBox[{"(", 
+        RowBox[{"width", " ", "and", " ", "height"}], ")"}]}], ",", " ", 
+      RowBox[{
+      "I", " ", "am", " ", "going", " ", "to", " ", "just", " ", "give", " ", 
+       "it", " ", "a", " ", "single", " ", "number"}], ",", " ", 
+      RowBox[{
+      "which", " ", "it", " ", "will", " ", "use", " ", "as", " ", "width"}], 
+      ",", " ", 
+      RowBox[{
+      "with", " ", "the", " ", "hiehgt", " ", "being", " ", "automatically", 
+       " ", "determined", " ", "by", " ", "the", " ", "aspect", " ", "ratio", 
+       " ", "of", " ", "the", " ", 
+       RowBox[{"graphic", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+      "urlofviewer", " ", "=", " ", 
+       "\"\<C:\\\\Program Files\\\\Adobe\\\\Acrobat \
+8.0\\\\Acrobat\\\\Acrobat.exe\>\""}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"commandstring", " ", "=", " ", 
+       RowBox[{
+       "\"\<start \\\"\>\"", " ", "<>", "   ", "urlofviewer", " ", "<>", 
+        "  ", "\"\<\\\" \\\"\>\"", " ", "<>", " ", "urlofdrawingfile", " ", "<>",
+         " ", "\"\<\\\"\>\""}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "this", " ", "opens", " ", "the", " ", "image", " ", "for", " ", 
+        "viewing"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "commandstring", "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Run", "[", "commandstring", "]"}], ";"}], 
+     "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.490530694296875*^9, 3.490531225359375*^9}, {
+   3.490531648140625*^9, 3.490531698375*^9}, {3.490531744796875*^9, 
+   3.490531745203125*^9}, {3.490531778140625*^9, 3.490531780203125*^9}, {
+   3.490531811359375*^9, 3.49053183446875*^9}, {3.490531888921875*^9, 
+   3.490532029671875*^9}, {3.490532075421875*^9, 3.4905321051875*^9}, {
+   3.49053223678125*^9, 3.49053223971875*^9}, {3.49053238809375*^9, 
+   3.4905323943125*^9}, {3.490532434953125*^9, 3.490532484265625*^9}, {
+   3.490532518015625*^9, 3.490532818015625*^9}, {3.490532849765625*^9, 
+   3.4905330165*^9}, {3.49053305678125*^9, 3.490533062921875*^9}, {
+   3.49053315553125*^9, 3.490533193078125*^9}, {3.490533286125*^9, 
+   3.490533421828125*^9}, {3.490533472703125*^9, 3.490533494671875*^9}, {
+   3.49053355778125*^9, 3.49053367371875*^9}, {3.490533776953125*^9, 
+   3.490533793765625*^9}, {3.490533965125*^9, 3.49053413875*^9}, {
+   3.490534320140625*^9, 3.49053432828125*^9}, {3.49053438478125*^9, 
+   3.49053449265625*^9}, {3.490534531046875*^9, 3.4905345315*^9}, {
+   3.490534688125*^9, 3.490534713515625*^9}, {3.490534879109375*^9, 
+   3.490534886203125*^9}, {3.490535193078125*^9, 3.49053528309375*^9}, {
+   3.490535333234375*^9, 3.4905354125*^9}, {3.4905354456875*^9, 
+   3.490535471*^9}, {3.49053560465625*^9, 3.490535638875*^9}, {
+   3.490535829984375*^9, 3.490535889078125*^9}, {3.490535935546875*^9, 
+   3.490535952625*^9}, {3.490535998078125*^9, 3.49053601071875*^9}, {
+   3.49053607953125*^9, 3.49053607971875*^9}, {3.49053614690625*^9, 
+   3.49053621803125*^9}, {3.49053635021875*^9, 3.490536491703125*^9}, {
+   3.490536568046875*^9, 3.490536569015625*^9}, {3.490536612734375*^9, 
+   3.490536633796875*^9}, {3.49053685271875*^9, 3.4905369128125*^9}, {
+   3.49053770021875*^9, 3.490537704765625*^9}, {3.49078488440625*^9, 
+   3.49078519346875*^9}, {3.49078522815625*^9, 3.490785265875*^9}, {
+   3.490785751703125*^9, 3.4907858051875*^9}, {3.490785853703125*^9, 
+   3.490785954703125*^9}, {3.490785990921875*^9, 3.490786075375*^9}, {
+   3.49078613609375*^9, 3.49078613734375*^9}, {3.490786227953125*^9, 
+   3.490786237953125*^9}, {3.490786271515625*^9, 3.49078628153125*^9}, {
+   3.490786346734375*^9, 3.49078635303125*^9}, 3.490786432390625*^9, {
+   3.490786639625*^9, 3.490786652015625*^9}, {3.490786685953125*^9, 
+   3.490786755453125*^9}, {3.4907867919375*^9, 3.49078685490625*^9}, 
+   3.490786982296875*^9, {3.49078711621875*^9, 3.49078712975*^9}, {
+   3.490787207390625*^9, 3.490787221203125*^9}, {3.4907873193125*^9, 
+   3.490787434625*^9}, {3.490787471203125*^9, 3.490787558109375*^9}, {
+   3.490787590609375*^9, 3.490787591265625*^9}, {3.490787626875*^9, 
+   3.490787640546875*^9}, {3.49078779134375*^9, 3.4907877984375*^9}, {
+   3.490787831125*^9, 3.4907878596875*^9}, {3.490787901421875*^9, 
+   3.49078792803125*^9}, {3.4907880275625*^9, 3.490788034515625*^9}, {
+   3.490788121703125*^9, 3.490788122015625*^9}, {3.490788155734375*^9, 
+   3.490788180453125*^9}, {3.490788213484375*^9, 3.490788220546875*^9}, {
+   3.49078832725*^9, 3.490788327734375*^9}, {3.490789125015625*^9, 
+   3.490789131859375*^9}, {3.49078917153125*^9, 3.490789206453125*^9}, {
+   3.490789253375*^9, 3.490789279890625*^9}, {3.490789348390625*^9, 
+   3.490789392953125*^9}, {3.49287326246875*^9, 3.492873353046875*^9}, {
+   3.49289043934375*^9, 3.492890447765625*^9}, {3.492890488984375*^9, 
+   3.4928904918125*^9}, {3.492890543375*^9, 3.49289069371875*^9}, {
+   3.492890889421875*^9, 3.49289090753125*^9}, {3.492891379390625*^9, 
+   3.49289143953125*^9}, {3.492891485328125*^9, 3.492891489484375*^9}, {
+   3.4928915290625*^9, 3.49289154203125*^9}, {3.492891582578125*^9, 
+   3.49289158721875*^9}, {3.492891661046875*^9, 3.4928917199375*^9}, {
+   3.5015279290625*^9, 3.501527998921875*^9}, {3.54593871584375*^9, 
+   3.54593873684375*^9}}]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{701, 995},
+WindowMargins->{{Automatic, 425}, {Automatic, 21}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 35781, 740, 5452, "Input",
+ InitializationCell->True]
+}
+]
+*)
+
+(* End of internal cache information *)

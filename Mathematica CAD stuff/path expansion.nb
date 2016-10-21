@@ -1,0 +1,78 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      2134,         69]
+NotebookOptionsPosition[      1804,         54]
+NotebookOutlinePosition[      2150,         69]
+CellTagsIndexPosition[      2107,         66]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "mathematicaextensionsdirectory", " ", "=", "  ", 
+   "\"\<C:\\\\Documents and Settings\\\\Neil Jackson\\\\My \
+Documents\\\\projects - interests - hobbies\\\\mathematica \
+extensions\\\\\>\""}], " ", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{
+   "mathematicaextensionsdirectory", " ", "<>", "  ", 
+    "\"\<mathematica objects with named parts\\\\\>\"", " ", "<>", " ", 
+    "\"\<namedpartobjects.m\>\""}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.486291256578125*^9, 3.486291338703125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pathoutline", "[", 
+   RowBox[{"path_", ",", "offsetdistance_"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "path", " ", "is", " ", "a", " ", "list", " ", "of", " ", "vertices"}], 
+    ",", " ", 
+    RowBox[{
+    "offsetdistance", " ", "is", " ", "a", " ", "real", " ", "number"}]}], 
+   "*)"}], " ", ":=", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.48629145221875*^9, 3.48629146084375*^9}, {
+  3.48629177575*^9, 3.486291802171875*^9}, {3.486291883390625*^9, 
+  3.486291900328125*^9}, {3.486292041125*^9, 3.48629212484375*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.4862916075*^9, 3.486291657421875*^9}}]
+},
+WindowSize->{615, 750},
+WindowMargins->{{Automatic, 470}, {Automatic, 59}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 569, 13, 112, "Input"],
+Cell[1117, 35, 593, 14, 72, "Input"],
+Cell[1713, 51, 87, 1, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

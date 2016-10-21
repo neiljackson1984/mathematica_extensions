@@ -1,0 +1,903 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     32711,        894]
+NotebookOptionsPosition[     30865,        828]
+NotebookOutlinePosition[     31243,        844]
+CellTagsIndexPosition[     31200,        841]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This implements an array whose elements can be addressed with keys, as in php \
+arrays.\
+\>", "Text",
+ CellChangeTimes->{{3.561333150753292*^9, 3.5613331821895847`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"keyedArray", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"key1", ",", " ", "value1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"key2", ",", "value2"}], "}"}], ",", "..."}], "]"}], 
+  "\[IndentingNewLine]", "*)"}]], "Input",
+ CellChangeTimes->{{3.5613331995639176`*^9, 3.561333204235613*^9}, {
+  3.561338091228445*^9, 3.561338099868738*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Unprotect", "@", "keyedArray"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Remove", "[", "keyedArray", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{"keyedArray", ",", " ", "Protected"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Unprotect", "@", "keyedPart"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Attributes", "[", "keyedPart", "]"}], " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Remove", "[", "keyedPart", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetAttributes", "[", 
+   RowBox[{"keyedPart", ",", "HoldAll"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"keyedPart", "[", 
+     RowBox[{"x_", ",", " ", "key_", ",", " ", 
+      RowBox[{"newvalue_:", "Null"}], ",", " ", 
+      RowBox[{"equalsstring_:", "\"\<=\>\""}]}], "]"}], " ", ":=", " ", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Block", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "address", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"address", " ", "=", " ", 
+        RowBox[{"Position", "[", 
+         RowBox[{"x", ",", " ", "key", ",", " ", 
+          RowBox[{"{", "2", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "@", "address"}], " ", "\[Equal]", " ", "0"}], 
+         ",", " ", 
+         RowBox[{"Return", "[", "Null", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"address", " ", "=", " ", 
+        RowBox[{"First", "@", "address"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"address", "\[LeftDoubleBracket]", 
+           RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], " ", "\[NotEqual]", 
+          " ", "1"}], ",", " ", 
+         RowBox[{"Return", "[", "Null", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"address", "\[LeftDoubleBracket]", 
+         RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], " ", "=", " ", "2"}], 
+       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"MatchQ", "[", 
+           RowBox[{"newvalue", ",", "Null"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"ToExpression", "@", 
+           RowBox[{"StringJoin", "@", " ", 
+            RowBox[{"Flatten", "@", "  ", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+               "There", " ", "is", " ", "probably", " ", "a", " ", "better", 
+                " ", "way", " ", "to", " ", "do", " ", "this", " ", "than", 
+                " ", "by", " ", "converting", " ", "the", " ", "command", " ",
+                 "into", " ", "a", " ", "string"}], ",", " ", 
+               RowBox[{"but", " ", "I", " ", 
+                RowBox[{"can", "'"}], "t", " ", "figure", " ", "out", " ", 
+                "the", " ", "order", " ", "of", " ", 
+                RowBox[{"evaluation", "."}]}]}], "*)"}], 
+             "\[IndentingNewLine]", 
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{"\"\<Part[\>\"", ",", "\[IndentingNewLine]", 
+               RowBox[{"ToString", "@", 
+                RowBox[{"Unevaluated", "@", "x"}]}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"\"\<, \>\"", " ", "<>", " ", 
+                  RowBox[{"ToString", "[", "i", "]"}]}], " ", ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "address"}], "}"}]}], 
+                "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+               "\"\<] \>\"", ",", "\[IndentingNewLine]", "equalsstring", ",", 
+               "\[IndentingNewLine]", "\"\< \>\"", ",", "\[IndentingNewLine]", 
+               RowBox[{"ToString", "@", 
+                RowBox[{"InputForm", "@", 
+                 RowBox[{"Unevaluated", "@", "newvalue"}]}]}]}], 
+              "\[IndentingNewLine]", "}"}]}]}]}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", 
+        RowBox[{"Part", "[", 
+         RowBox[{"x", ",", 
+          RowBox[{"Sequence", "@@", "address"}]}], "]"}], "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "lets", " ", "us", " ", "use", " ", "the", " ", "syntax", 
+     " ", 
+     RowBox[{"namedpart", "[", 
+      RowBox[{"x", ",", "partname"}], "]"}]}], " ", "=", " ", 
+    RowBox[{"newvalue", " ", 
+     RowBox[{"(", 
+      RowBox[{"or", " ", ":="}], ")"}], " ", "to", " ", "alter", " ", "the", 
+     " ", "definition", " ", "of", " ", 
+     RowBox[{"x", "."}]}]}], "  ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"UpValues", "[", "keyedPart", "]"}], " ", "=", " ", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"HoldPattern", "[", 
+        RowBox[{"Set", "[", 
+         RowBox[{
+          RowBox[{"keyedPart", "[", 
+           RowBox[{"x_", ",", " ", "key_"}], "]"}], ",", "y_"}], "]"}], " ", 
+        "]"}], " ", "\[RuleDelayed]", " ", 
+       RowBox[{"keyedPart", "[", 
+        RowBox[{"x", ",", "key", ",", "y", ",", " ", "\"\<=\>\""}], "]"}]}], 
+      ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"HoldPattern", "[", 
+        RowBox[{"SetDelayed", "[", 
+         RowBox[{
+          RowBox[{"keyedPart", "[", 
+           RowBox[{"x_", ",", " ", "key_"}], "]"}], ",", "y_"}], "]"}], " ", 
+        "]"}], " ", "\[RuleDelayed]", " ", 
+       RowBox[{"keyedPart", "[", 
+        RowBox[{"x", ",", "key", ",", "y", ",", " ", "\"\<:=\>\""}], 
+        "]"}]}]}], "\[IndentingNewLine]", "}"}]}], ";"}], 
+  " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{"keyedPart", ",", " ", "Protected"}], "]"}], " ", ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5613332661082373`*^9, 3.5613333070597897`*^9}, {
+   3.5613355098893204`*^9, 3.561335510936162*^9}, {3.5613358478614683`*^9, 
+   3.561335894828415*^9}, {3.561336026823346*^9, 3.561336046088231*^9}, {
+   3.5613362110193977`*^9, 3.5613362865321226`*^9}, {3.5613363299054575`*^9, 
+   3.561336382012831*^9}, {3.5613367386553855`*^9, 3.561336740202201*^9}, {
+   3.5613368626974974`*^9, 3.5613368654005184`*^9}, {3.5613370802985163`*^9, 
+   3.5613370826734247`*^9}, {3.561337151467658*^9, 3.561337169623211*^9}, {
+   3.5613372860093665`*^9, 3.561337291946638*^9}, 3.5613373286796026`*^9, {
+   3.5613377183365145`*^9, 3.5613377654909534`*^9}, {3.561337906798027*^9, 
+   3.5613379081104765`*^9}, {3.614295733566064*^9, 3.614295736904571*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "takes", " ", "an", " ", "m", " ", "by", " ", "n", " ", "list", " ", 
+     "whose", " ", "first", " ", "row", " ", "is", " ", "presumed", " ", "to",
+      " ", "contain", " ", "the", " ", "array", " ", "keys"}], ",", " ", 
+    RowBox[{
+    "like", " ", "the", " ", "header", " ", "row", " ", "of", " ", "a", " ", 
+     "table"}], ",", " ", 
+    RowBox[{"and", " ", "produces", " ", "a", " ", "list", " ", "of", " ", 
+     RowBox[{"keyedArrays", ".", "  ", "The"}], " ", "idea", " ", "here", " ",
+      "is", " ", "to", " ", "apply", " ", "this", " ", "function", " ", "to", 
+     " ", "an", " ", "SQL", " ", "result", " ", "set", " ", "returned", " ", 
+     "by", " ", "SQLExecute", " ", "with", " ", "the", " ", 
+     "\"\<ShowColumnHeadings\>\"", " ", "option", " ", "set", " ", "to", " ", 
+     RowBox[{"True", ".", "  ", "Then"}]}], ",", " ", 
+    RowBox[{
+    "the", " ", "result", " ", "will", " ", "be", " ", "a", " ", "list", " ", 
+     "of", " ", "keyedArrays"}], ",", " ", 
+    RowBox[{
+    "where", " ", "we", " ", "can", " ", "access", " ", "the", " ", 
+     "elements", " ", "with", " ", "keyedPart", " ", "and", " ", "specify", 
+     " ", "the", " ", "name", " ", "of", " ", "the", " ", "column", " ", 
+     "rather", " ", "than", " ", "the", " ", "numerical", " ", "index", " ", 
+     "of", " ", "the", " ", 
+     RowBox[{"column", "."}]}]}], "  ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"tableWithHeadingsToListOfKeyedArrays", "[", "resultSet_", "]"}],
+      " ", ":=", " ", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"keyedArray", "@@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+           "resultSet", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}], ",", "row"}], "}"}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"row", ",", 
+         RowBox[{"resultSet", "\[LeftDoubleBracket]", 
+          RowBox[{"2", ";;", 
+           RowBox[{"-", "1"}]}], "\[RightDoubleBracket]"}]}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "define", " ", "an", " ", "alias", " ", "for", " ", "this", " ", 
+     "ridiculously", " ", "long", " ", "function", " ", "name"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "toKeyed", " ", "=", " ", "tableWithHeadingsToListOfKeyedArrays"}], ";"}],
+    "\[IndentingNewLine]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5613381631631823`*^9, 3.5613383139855156`*^9}, {
+   3.5613383590931587`*^9, 3.5613384711357307`*^9}, {3.5613386239267387`*^9, 
+   3.5613387358286915`*^9}, {3.561338812653866*^9, 3.5613388801981473`*^9}, 
+   3.5613390162554226`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "returns", " ", "a", " ", "list", " ", "of", " ", "all", " ", "keys", " ", 
+    "in", " ", "the", " ", "given", " ", "keyedArray"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"keys", "[", "x_", "]"}], " ", ":=", " ", 
+     RowBox[{"If", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "@", "x"}], " ", ">", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"First", "@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"Level", "[", 
+          RowBox[{"x", ",", "1"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", "}"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5613847507884254`*^9, 3.5613847727875805`*^9}, {
+  3.56138492448488*^9, 3.5613849459996786`*^9}, {3.5634917394801908`*^9, 
+  3.563491757495124*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Level", "[", 
+  RowBox[{
+   RowBox[{"a", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6"}], "}"}]}], "]"}], ",", "1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5613847916931047`*^9, 3.5613848059113083`*^9}, {
+  3.5613849005170507`*^9, 3.561384918938218*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "6"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.561384905532483*^9, 3.561384919438199*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Experimentation:", "Subtitle",
+ CellChangeTimes->{{3.561339964562756*^9, 3.561339982530816*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.561336118366706*^9, 3.56133613010063*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", "=", " ", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<primary\>\"", ",", "18000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<secondary\>\"", ",", "19000"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5613364267611127`*^9, 3.561336473524942*^9}, {
+  3.5613379629208717`*^9, 3.561337966311367*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"keys", "@", "x"}]], "Input",
+ CellChangeTimes->{{3.561384956468027*^9, 3.561384957999218*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"primary\"\>", ",", "\<\"secondary\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.5613849583898277`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"keyedPart", "[", 
+  RowBox[{
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<primary\>\"", ",", "18000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<secondary\>\"", ",", "19000"}], "}"}]}], "]"}], ",", 
+   "\"\<primary\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.561336489149342*^9, 3.561336495789712*^9}, 
+   3.5613366108477936`*^9}],
+
+Cell[BoxData["18000"], "Output",
+ CellChangeTimes->{3.5613364963521905`*^9, 3.5613366118633795`*^9, 
+  3.561336747733162*^9, 3.561337064502248*^9, 3.561337340085415*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"keyedPart", "[", 
+    RowBox[{
+     RowBox[{"keyedArray", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<primary\>\"", ",", "18000"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<secondary\>\"", ",", "19000"}], "}"}]}], "]"}], ",", 
+     "\"\<primary\>\""}], "]"}], " ", "=", " ", "3"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"keyedPart", "[", 
+   RowBox[{"x", ",", "\"\<primary\>\""}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.5613367502018175`*^9, 3.5613367557172303`*^9}, {
+  3.5613373457414474`*^9, 3.56133734972567*^9}, {3.561337791068096*^9, 
+  3.561337833832079*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Set", "::", "setps"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\(keyedArray[\\(\\(\\(\\({primary, 18000}\\)\
+\\), \\(\\({secondary, 19000}\\)\\)\\)\\)]\\)\[NoBreak] in the part \
+assignment is not a symbol. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/setps\\\", ButtonNote -> \
+\\\"Set::setps\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5613378369413347`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"keyedPart", "[", 
+   RowBox[{
+    RowBox[{"keyedPart", "[", 
+     RowBox[{
+      RowBox[{"keyedArray", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<primary\>\"", ",", "18000"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"\"\<secondary\>\"", ",", "19000"}], "}"}]}], "]"}], ",", 
+      "\"\<primary\>\""}], "]"}], ",", "\"\<primary\>\""}], "]"}], " ", "=", 
+  " ", "3"}]], "Input",
+ CellChangeTimes->{3.5613378052863007`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"y", "=", " ", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"keyedArray", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<primary\>\"", ",", "18000"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<secondary\>\"", ",", "19000"}], "}"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"keyedArray", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<primary\>\"", ",", "18001"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<secondary\>\"", ",", "19001"}], "}"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5613379683269143`*^9, 3.5613380239029055`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"keyedPart", "[", 
+    RowBox[{
+     RowBox[{"y", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+     ",", "\"\<primary\>\""}], "]"}], " ", "=", " ", "181"}], ";"}]], "Input",
+ CellChangeTimes->{{3.56133802910583*^9, 3.5613380706354856`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["y"], "Input",
+ CellChangeTimes->{3.561338073822863*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"primary\"\>", ",", "181"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"secondary\"\>", ",", "19000"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"primary\"\>", ",", "18001"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"secondary\"\>", ",", "19001"}], "}"}]}], "]"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.5613380741509757`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", "\[IndentingNewLine]", 
+  RowBox[{"i", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", 
+     RowBox[{
+      RowBox[{"{", "11", "}"}], "\[LeftDoubleBracket]", 
+      RowBox[{"2", ";;", 
+       RowBox[{"-", "1"}]}], "\[RightDoubleBracket]"}]}], "}"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.561338504993806*^9, 3.5613385424142437`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{{3.561338514571563*^9, 3.5613385426954827`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", "11", "}"}], "\[LeftDoubleBracket]", 
+  RowBox[{"2", ";;", 
+   RowBox[{"-", "1"}]}], "\[RightDoubleBracket]"}]], "Input",
+ CellChangeTimes->{{3.5613385454922504`*^9, 3.561338606286791*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{{3.5613385498202095`*^9, 3.5613386088023195`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"results", " ", "=", " ", 
+  RowBox[{"toKeyed", "@", 
+   RowBox[{"SQLExecute", "[", 
+    RowBox[{"myInventory", ",", 
+     RowBox[{
+     "\"\<SELECT * \nFROM descriptions INNER JOIN types \nON types.id = \
+descriptions.types_id \nWHERE type_name='\>\"", " ", "<>", " ", 
+      "\"\<ceramic capacitor\>\"", " ", "<>", "\"\<' ;\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\"\<ShowColumnHeadings\>\"", " ", "\[Rule]", " ", "True"}]}], 
+    "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.5613388054978905`*^9, 3.5613388059353743`*^9}, {
+  3.5613388473244095`*^9, 3.561338851902359*^9}, {3.5613389041972256`*^9, 
+  3.5613389113375764`*^9}, {3.5613389700071983`*^9, 3.561339039207666*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "17"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6385"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "10", ",", "48", ",", "44.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "18"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6386"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "10", ",", "55", ",", "42.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "19"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6387"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "11", ",", "0", ",", "44.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6388"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "11", ",", "37", ",", "6.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "21"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6389"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "11", ",", "39", ",", "38.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "25"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6390"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "13", ",", "54", ",", "49.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "30"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6394"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "14", ",", "10", ",", "29.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "31"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6395"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "14", ",", "16", ",", "49.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "35"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6399"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "14", ",", "34", ",", "8.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}], ",", 
+   RowBox[{"keyedArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "37"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"vupn\"\>", ",", "6401"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"source\"\>", ",", "Null"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"date_added\"\>", ",", 
+       RowBox[{"SQLDateTime", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "2012", ",", "8", ",", "16", ",", "14", ",", "37", ",", "59.`"}], 
+         "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"types_id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"id\"\>", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"type_name\"\>", ",", "\<\"ceramic capacitor\"\>"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"attribute_names\"\>", 
+       ",", "\<\"capacitance, tolerance, voltage, dielectric type, ESR, \
+mounting type, operating temperature, package, size, height - seated (max), \
+thickness, lead spacing\"\>"}], "}"}]}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.561339039598276*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"keyedPart", "[", 
+   RowBox[{
+    RowBox[{"results", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}],
+     ",", "\"\<source\>\""}], "]"}], " "}]], "Input",
+ CellChangeTimes->{{3.561339032598545*^9, 3.5613390635036077`*^9}, {
+  3.5613390965960875`*^9, 3.561339133579042*^9}}],
+
+Cell["Null", "Output",
+ CellChangeTimes->{{3.5613391100486956`*^9, 3.5613391165640707`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.561339118970228*^9, 3.561339124110656*^9}}]
+}, Open  ]]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{712, 718},
+WindowMargins->{{333, Automatic}, {Automatic, 60}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 179, 4, 29, "Text"],
+Cell[739, 26, 413, 10, 72, "Input"],
+Cell[1155, 38, 7270, 163, 1092, "Input",
+ InitializationCell->True],
+Cell[8428, 203, 2889, 63, 312, "Input",
+ InitializationCell->True],
+Cell[11320, 268, 965, 25, 152, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[12310, 297, 425, 12, 31, "Input"],
+Cell[12738, 311, 296, 9, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13071, 325, 102, 1, 49, "Subtitle"],
+Cell[13176, 328, 91, 1, 31, "Input"],
+Cell[13270, 331, 401, 11, 31, "Input"],
+Cell[CellGroupData[{
+Cell[13696, 346, 118, 2, 31, "Input"],
+Cell[13817, 350, 147, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14001, 358, 404, 11, 31, "Input"],
+Cell[14408, 371, 169, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14614, 378, 671, 18, 52, "Input"],
+Cell[15288, 398, 534, 11, 21, "Message"]
+}, Open  ]],
+Cell[15837, 412, 490, 14, 52, "Input"],
+Cell[16330, 428, 709, 19, 92, "Input"],
+Cell[17042, 449, 298, 7, 31, "Input"],
+Cell[CellGroupData[{
+Cell[17365, 460, 69, 1, 31, "Input"],
+Cell[17437, 463, 532, 16, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18006, 484, 419, 10, 92, "Input"],
+Cell[18428, 496, 113, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18578, 503, 228, 5, 31, "Input"],
+Cell[18809, 510, 115, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18961, 517, 738, 14, 132, "Input"],
+Cell[19702, 533, 10592, 273, 1304, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30331, 811, 316, 7, 31, "Input"],
+Cell[30650, 820, 92, 1, 30, "Output"]
+}, Open  ]],
+Cell[30757, 824, 92, 1, 31, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
